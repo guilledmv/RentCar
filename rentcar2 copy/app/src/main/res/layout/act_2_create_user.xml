@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ACT_2_CREATE_USER">
+
+    <EditText
+        android:id="@+id/edt_name_ACT_2_CREATE_USER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/nombre_completo"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edt_dni_ACT_2_CREATE_USER"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.683"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edt_dni_ACT_2_CREATE_USER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/dni_cif"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208"
+        tools:layout_editor_absoluteX="16dp"
+        android:autofillHints=""
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <EditText
+        android:id="@+id/edt_edad_ACT_2_CREATE_USER"
+        android:layout_width="65dp"
+        android:layout_height="52dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/edad"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dni_ACT_2_CREATE_USER"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <EditText
+        android:id="@+id/edt_domicilio_ACT_2_CREATE_USER"
+        android:layout_width="287dp"
+        android:layout_height="56dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/domicilio"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/edt_edad_ACT_2_CREATE_USER"
+        app:layout_constraintTop_toBottomOf="@+id/edt_dni_ACT_2_CREATE_USER"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <RadioGroup
+        android:id="@+id/rg_tipo_cliente_ACT_2_CREATE_USER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_ACT_2_CREATE_USER">
+        <RadioButton
+            android:id="@+id/rb_particular_ACT_2_CREATE_USER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/particular"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="345dp" />
+
+        <RadioButton
+            android:id="@+id/rb_empresa_ACT_2_CREATE_USER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empresa"
+            tools:layout_editor_absoluteX="18dp"
+            tools:layout_editor_absoluteY="382dp" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edt_email_ACT_2_CREATE_USER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_domicilio_ACT_2_CREATE_USER"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <Button
+        android:id="@+id/btn_crear_ACT_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="80dp"
+        android:text="@string/crear_usuario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_tipo_cliente_ACT_2_CREATE_USER"
+        app:layout_constraintVertical_bias="0.315"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="80dp" />
+
+    <EditText
+        android:id="@+id/edt_password_ACT_2_CREATE_USER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/rg_tipo_cliente_ACT_2_CREATE_USER"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_ACT_2_CREATE_USER"
+        app:layout_constraintVertical_bias="0.405"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:autofillHints=""
+        android:hint="@string/password"/>
+
+    <ProgressBar
+        android:id="@+id/pb_ACT_2_CREATE_USER"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="39dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_crear_ACT_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.902" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

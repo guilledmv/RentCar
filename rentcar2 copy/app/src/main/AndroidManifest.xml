@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rentcar">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Rentcar">
+        <activity android:name=".ACT_4_FORMULARIO_RESERVA"
+            android:label="FORMULARIO RESERVA"
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL"></activity>
+        <activity android:name=".ACT_3_PANTALLA_PRINCIPAL"
+            android:label="MENU PRINCIPAL"/>
+        <activity
+            android:name=".ACT_1_PANTALLA_INICIO"
+            android:label="RENTCAR">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ACT_2_LOGIN"
+            android:label="LOGIN"
+            android:parentActivityName=".ACT_2_LOGIN_OPTIONS" />
+        <activity
+            android:name=".ACT_2_CREATE_USER"
+            android:label="CREAR USUARIO"
+            android:parentActivityName=".ACT_2_LOGIN_OPTIONS" />
+        <activity
+            android:name=".ACT_2_LOGIN_OPTIONS"
+            android:label="INICIAR SESION" />
+    </application>
+
+</manifest>

@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">rentcar</string>
+    <string name="login">LOGIN</string>
+    <string name="create_user">CREA USUARIO</string>
+    <string name="password">Contraseña</string>
+    <string name="crear_usuario">Crear usuario</string>
+    <string name="email">Email</string>
+    <string name="empresa">Empresa</string>
+    <string name="particular">Particular</string>
+    <string name="domicilio">Domicilio</string>
+    <string name="edad">Edad</string>
+    <string name="dni_cif">DNI</string>
+    <string name="nombre_completo">Nombre Completo</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="alquila_el_veh_culo_que_mejor_se_ajusta_a_ti">ALQUILA EL VEHÍCULO QUE MEJOR SE AJUSTA A TI!</string>
+    <string name="modificar_reserva">Modificar Reserva</string>
+    <string name="borrar_reserva">Borrar Reserva</string>
+    <string name="historial">Historial</string>
+    <string name="realizar_reserva">Realizar Reserva</string>
+    <string name="hora_reserva">Hora Reserva</string>
+    <string name="fecha_reserva">Fecha reserva</string>
+    <string name="inicio_alquiler">Inicio Alquiler</string>
+    <string name="fin_alquiler">Fin Alquiler</string>
+    <string name="fecha">Fecha</string>
+    <string name="hora">Hora</string>
+    <string name="selecci_n_de_veh_culo">Selección de vehículo</string>
+    <string name="crear_reserva">Crear reserva</string>
+    <string name="franquicia_origen">Franquicia Origen</string>
+    <string-array name="marcas_coche">
+        <item>Porsche</item>
+        <item>Seat</item>
+        <item>Dacia</item>
+    </string-array>
+</resources>
