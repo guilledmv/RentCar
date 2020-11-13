@@ -13,7 +13,8 @@
         android:theme="@style/Theme.Rentcar">
         <activity android:name=".ACT_4_FORMULARIO_RESERVA"
             android:label="FORMULARIO RESERVA"
-            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL"></activity>
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL">
+        </activity>
         <activity android:name=".ACT_3_PANTALLA_PRINCIPAL"
             android:label="MENU PRINCIPAL"/>
         <activity

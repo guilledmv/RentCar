@@ -26,7 +26,14 @@
     <string name="selecci_n_de_veh_culo">Selección de vehículo</string>
     <string name="crear_reserva">Crear reserva</string>
     <string name="franquicia_origen">Franquicia Origen</string>
+    <string-array name="franquicias">
+        <item></item>
+        <item>Madrid</item>
+        <item>Galicia</item>
+        <item>Talavera</item>
+    </string-array>
     <string-array name="marcas_coche">
+        <item></item>
         <item>Porsche</item>
         <item>Seat</item>
         <item>Dacia</item>

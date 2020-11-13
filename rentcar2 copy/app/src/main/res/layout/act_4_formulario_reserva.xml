@@ -69,10 +69,14 @@
         android:id="@+id/spinner_marca_ACT_4_FORMULARIO_RESERVA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="128dp"
+        android:layout_marginRight="128dp"
+        android:entries="@array/marcas_coche"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.544" />
 
     <TextView
         android:id="@+id/tv_fin_ACT_4_FORMULARIO"
@@ -169,6 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="250dp"
         android:layout_marginLeft="40dp"
+        android:entries="@array/franquicias"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,6 +186,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="40dp"
+        android:entries="@array/franquicias"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -219,5 +225,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_hora_fin_ACT_4_FORMULARIO"
         app:layout_constraintVertical_bias="0.576" />
+
+    <TextView
+        android:id="@+id/tv_modelo_ACT4_formulario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <TextView
+        android:id="@+id/tv_tarifa_ACT4_formulario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tarifa"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <TextView
+        android:id="@+id/tv_disponibilidad_ACT4_formulario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
