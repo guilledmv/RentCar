@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:text="@string/historial"
+        android:text="@string/historial_de_facturaci_n"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

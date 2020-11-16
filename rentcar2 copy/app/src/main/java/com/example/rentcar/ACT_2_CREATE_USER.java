@@ -103,7 +103,7 @@ public class ACT_2_CREATE_USER extends AppCompatActivity {
                         // Metodo que inserta los datos en un map
                         insertaDatosEnMapa(map);
                         // Insertamos los datos en la base de datos firebase
-                        cloudReference.collection("Usuarios").document(edt_dni_ACT_2_CREATE_USER.getText().toString()).collection("Datos personales").document(edt_name_ACT_2_CREATE_USER.getText().toString()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        cloudReference.collection("Usuarios").document(edt_email_ACT_2_CREATE_USER.getText().toString()).collection("Datos personales").document(edt_email_ACT_2_CREATE_USER.getText().toString()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 // Datos añadidos con exito
@@ -114,7 +114,7 @@ public class ACT_2_CREATE_USER extends AppCompatActivity {
                                 Toast.makeText(ACT_2_CREATE_USER.this,"Error al cargar datos en la base de datos",Toast.LENGTH_SHORT).show();
                             }
                         });
-                        pb_ACT_2_CREATE_USER.setVisibility(View.GONE);
+                        pb_ACT_2_CREATE_USER.setVisibility(View.INVISIBLE);
                         // Añadir datos del usuario al cloud
                         Toast.makeText(ACT_2_CREATE_USER.this, "Usuario registrado con exito", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ACT_2_CREATE_USER.this,ACT_2_LOGIN.class);

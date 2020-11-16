@@ -154,18 +154,18 @@
 
     <Button
         android:id="@+id/btn_crear_reserva_ACT_4_CREAR_RESERVA"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:textStyle="italic"
+        android:layout_marginRight="40dp"
         android:text="@string/crear_reserva"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintVertical_bias="0.937" />
 
     <Spinner
         android:id="@+id/spinner_franquicia_origen_ACT_4_FORMULARIO_RESERVA"
@@ -178,7 +178,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.366"
+        android:layout_marginEnd="250dp"
+        android:layout_marginStart="40dp" />
 
     <Spinner
         android:id="@+id/spinner_franquicia_destino_ACT_4_FORMULARIO_RESERVA"
@@ -215,7 +217,7 @@
         android:id="@+id/tv_franquicia_destino_ACT_4_FORMULARIO_RESERVA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Franquicia Destino"
+        android:text="@string/franquicia_destino"
         android:textColor="@color/orange"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -230,7 +232,8 @@
         android:id="@+id/tv_modelo_ACT4_formulario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:text="@string/modelo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.193"
@@ -242,8 +245,8 @@
         android:id="@+id/tv_tarifa_ACT4_formulario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tarifa"
-        android:textSize="18sp"
+        android:text="@string/tarifa"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.775"
@@ -255,12 +258,91 @@
         android:id="@+id/tv_disponibilidad_ACT4_formulario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:text="@string/disponibilidad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.691" />
+
+    <Button
+        android:id="@+id/btn_calcular_presupuesto_ACT_4_FORMULARIO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calcular_presupuesto"
+        app:layout_constraintBottom_toTopOf="@+id/btn_crear_reserva_ACT_4_CREAR_RESERVA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_disponibilidad_ACT4_formulario"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tv_matricula_ACT_4_FORMULARIO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+    <TextView
+        android:id="@+id/tv_dni_ACT_4_FORMULARIO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+    <TextView
+        android:id="@+id/tv_nombre_ACT_4_FORMULARIO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+    <TextView
+        android:id="@+id/tv_tipo_ACT_4_FORMULARIO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <ProgressBar
+        android:id="@+id/pb_calcular_presupuesto_ACT_4_FORMULARIO"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="41dp"
+        android:layout_height="45dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_calcular_presupuesto_ACT_4_FORMULARIO"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
+
+    <ProgressBar
+        android:id="@+id/pb_crear_reserva_ACT_4_FORMULARIO_RESERVA"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toEndOf="@+id/btn_crear_reserva_ACT_4_CREAR_RESERVA"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

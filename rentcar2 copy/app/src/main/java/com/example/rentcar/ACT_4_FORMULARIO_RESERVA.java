@@ -3,12 +3,12 @@ package com.example.rentcar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,22 +19,35 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
 
     // Variables pantalla formulario de reserva
     private TextView tv_inicio_alquiler,tv_fin_alquiler,tv_seleccion,tv_franquicia_origen,
-                    tv_franquicia_destino,tv_modelo,tv_tarifa,tv_disponibilidad;
+                    tv_franquicia_destino,tv_modelo,tv_tarifa,tv_disponibilidad,tv_matricula,
+                    tv_dni,tv_nombre,tv_tipo;
     private EditText edt_fecha_inicio_alquiler,edt_fecha_fin_alquiler,edt_hora_inicio_alquiler,
                         edt_hora_fin_alquiler;
-    private Button btn_crear_reserva;
+    private Button btn_crear_reserva,btn_crear_presupuesto;
 
     private Spinner spinner_franquicia_origen,spinner_franquicia_destino,spinner_marca_vehiculo;
 
+    private ProgressBar pb_calcular_presupuesto,pb_crear_reserva;
+
     private Calendar fechaActual = Calendar.getInstance();
+
+
+    private int numero_dias;
+    private int numero_meses;
+    private int numero_años;
 
     // Constantes para acceder a la base de datos firebase
     private final String VEHICULOS = "Vehículos";
@@ -51,6 +64,11 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
     // Variable para almacenar en la base de datos cloudFirebase
     private FirebaseFirestore cloudReference;
 
+    // Variable email
+    private String email;
+    private int n = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,35 +81,149 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         edt_hora_inicio_alquiler = findViewById(R.id.edt_hora_inicio_ACT_4_FORMULARIO);
         edt_hora_fin_alquiler = findViewById(R.id.edt_hora_fin_ACT_4_FORMULARIO);
         btn_crear_reserva = findViewById(R.id.btn_crear_reserva_ACT_4_CREAR_RESERVA);
+        btn_crear_presupuesto = findViewById(R.id.btn_calcular_presupuesto_ACT_4_FORMULARIO);
         tv_franquicia_origen = findViewById(R.id.tv_franquicia_origen_ACT_4_FORMULARIO_RESERVA);
         tv_franquicia_destino = findViewById(R.id.tv_franquicia_destino_ACT_4_FORMULARIO_RESERVA);
         spinner_marca_vehiculo = findViewById(R.id.spinner_marca_ACT_4_FORMULARIO_RESERVA);
+        spinner_franquicia_origen = findViewById(R.id.spinner_franquicia_origen_ACT_4_FORMULARIO_RESERVA);
         spinner_franquicia_destino = findViewById(R.id.spinner_franquicia_destino_ACT_4_FORMULARIO_RESERVA);
         tv_modelo = findViewById(R.id.tv_modelo_ACT4_formulario);
         tv_disponibilidad = findViewById(R.id.tv_disponibilidad_ACT4_formulario);
         tv_tarifa = findViewById(R.id.tv_tarifa_ACT4_formulario);
+        tv_matricula = findViewById(R.id.tv_matricula_ACT_4_FORMULARIO);
+        tv_dni = findViewById(R.id.tv_dni_ACT_4_FORMULARIO);
+        tv_nombre = findViewById(R.id.tv_nombre_ACT_4_FORMULARIO);
+        tv_tipo = findViewById(R.id.tv_tipo_ACT_4_FORMULARIO);
+        pb_calcular_presupuesto = findViewById(R.id.pb_calcular_presupuesto_ACT_4_FORMULARIO);
+        pb_crear_reserva = findViewById(R.id.pb_crear_reserva_ACT_4_FORMULARIO_RESERVA);
         mAuth = FirebaseAuth.getInstance();
         usuarioActual = mAuth.getCurrentUser();
         cloudReference = FirebaseFirestore.getInstance();
+        email = getIntent().getStringExtra("email");
+        // Cuando pulsamos el boton de crear presupuesto
+        btn_crear_presupuesto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // SI EXISTE ALGUN CAMPO VACIO--> ERROR NO SE PUEDE CREAR PRESUPUESTO
+                if (edt_fecha_inicio_alquiler.getText().toString().isEmpty() || edt_fecha_fin_alquiler.getText().toString().isEmpty() ||
+                        edt_hora_inicio_alquiler.getText().toString().isEmpty() || edt_hora_fin_alquiler.getText().toString().isEmpty() || spinner_franquicia_origen.getSelectedItem().toString().isEmpty()
+                        || spinner_franquicia_destino.getSelectedItem().toString().isEmpty() || spinner_marca_vehiculo.getSelectedItem().toString().isEmpty()) {
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, se deben rellenar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+                // COMPROBAMOS FECHAS Y HORAS
+                pb_calcular_presupuesto.setVisibility(View.VISIBLE);
+                if (!compruebaFecha(edt_fecha_inicio_alquiler.getText().toString())) {
+                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fecha inicio alquiler incorrecta", Toast.LENGTH_SHORT).show();
+                }
+                if (!compruebaFecha(edt_fecha_fin_alquiler.getText().toString())) {
+                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fecha fin alquiler incorrecta", Toast.LENGTH_SHORT).show();
+                }
+                if (!compruebaHora(edt_hora_inicio_alquiler.getText().toString())) {
+                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Hora inicio alquiler incorrecta", Toast.LENGTH_SHORT).show();
+                }
+                if (!compruebaHora(edt_hora_fin_alquiler.getText().toString())) {
+                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Hora fin alquiler incorrecta", Toast.LENGTH_SHORT).show();
+                }
+                if (compruebaFecha(edt_fecha_inicio_alquiler.getText().toString()) && compruebaFecha(edt_fecha_fin_alquiler.getText().toString())
+                        && compruebaHora(edt_hora_inicio_alquiler.getText().toString()) && compruebaHora(edt_hora_fin_alquiler.getText().toString())) {
+                    String mesInicio = edt_fecha_inicio_alquiler.getText().toString().substring(3, 5);
+                    String añoInicio = edt_fecha_inicio_alquiler.getText().toString().substring(6, 10);
+                    String diaInicio = edt_fecha_inicio_alquiler.getText().toString().substring(0, 2);
+                    String horaInicio = edt_hora_inicio_alquiler.getText().toString().substring(0, 2);
+                    String minutosInicio = edt_hora_inicio_alquiler.getText().toString().substring(3, 5);
+                    String horaFin = edt_hora_fin_alquiler.getText().toString().substring(0, 2);
+                    String minutosFin = edt_hora_fin_alquiler.getText().toString().substring(3, 5);
+                    String mesFin = edt_fecha_fin_alquiler.getText().toString().substring(3, 5);
+                    String añoFin = edt_fecha_fin_alquiler.getText().toString().substring(6, 10);
+                    String diaFin = edt_fecha_fin_alquiler.getText().toString().substring(0, 2);
+                    numero_dias = Integer.parseInt(diaFin) - Integer.parseInt(diaInicio);
+                    numero_meses = Integer.parseInt(mesFin) - Integer.parseInt(mesInicio);
+                    numero_años = Integer.parseInt(añoFin) - Integer.parseInt(añoInicio);
+                    // Compruebo que la fecha de fin de reserva > fecha inicio reserva
+                    // 1ºcaso--> Año inicio > año fin--> peta
+                    if (Integer.parseInt(añoInicio) > Integer.parseInt(añoFin)) {
+                        pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                        Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, años incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                    // 2ºcaso--> Estan en el mismo año--> Mes inicio >= mes fin
+                    if (Integer.parseInt(añoInicio) == Integer.parseInt(añoFin)) {
+                        // CASO 2.1: Mes fin < mes inicio-> peta
+                        if (Integer.parseInt(mesInicio) > Integer.parseInt(mesFin)) {
+                            pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, meses incorrectos", Toast.LENGTH_SHORT).show();
+                        }
+                        // CASO 2.2: Mes fin == Mes inicio--> comprobamos el dia
+                        if (Integer.parseInt(mesInicio) == Integer.parseInt(mesFin)) {
+                            if (Integer.parseInt(diaInicio) > Integer.parseInt(diaFin)) {
+                                pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, el dia de inicio no puede ser mayor que el de fin de alquiler", Toast.LENGTH_SHORT).show();
+                            }
+                            // CASO PENDIENTE : los dias son iguales, comparar horas.
+                            if (Integer.parseInt(diaInicio) == Integer.parseInt(diaFin)) {
+                                // Si la horaInicio < horaFin
+                                if (Integer.parseInt(horaInicio) > Integer.parseInt(horaFin)) {
+                                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, la hora necesaria no es válida", Toast.LENGTH_SHORT).show();
+                                }
+                                // Si las horas son iguales--> comprueba los minutos
+                                if (Integer.parseInt(horaInicio) == Integer.parseInt(horaFin)) {
+                                    if (Integer.parseInt(minutosInicio) > Integer.parseInt(minutosFin)) {
+                                        pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, los minutos son inválidos", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
 
+                    // Obtenemos marca elegida
+                    String marca = spinner_marca_vehiculo.getSelectedItem().toString();
+                    if (marca.equals(PORSCHE)) {
+                        obtenDatosMarca(cloudReference, VEHICULOS, PORSCHE, tv_modelo, tv_disponibilidad, tv_tarifa, tv_matricula, numero_dias, numero_meses, numero_años);
+                    }
+                    if (marca.equals(SEAT)) {
+                        obtenDatosMarca(cloudReference, VEHICULOS, SEAT, tv_modelo, tv_disponibilidad, tv_tarifa, tv_matricula, numero_dias, numero_meses, numero_años);
+                    }
+                    if (marca.equals(DACIA)) {
+                        obtenDatosMarca(cloudReference, VEHICULOS, DACIA, tv_modelo, tv_disponibilidad, tv_tarifa, tv_matricula, numero_dias, numero_meses, numero_años);
+                    }
+                    obtenDatosUsuario(cloudReference, tv_dni, tv_nombre, tv_tipo);
+
+                    pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
 
         // Cuando pulsamos el boton de crear reserva
         btn_crear_reserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // SI EXISTE ALGUN CAMPO VACIO--> ERROR NO SE PUEDE CREAR RESERVA
+                if(edt_fecha_inicio_alquiler.getText().toString().isEmpty() || edt_fecha_fin_alquiler.getText().toString().isEmpty() ||
+                        edt_hora_inicio_alquiler.getText().toString().isEmpty() || edt_hora_fin_alquiler.getText().toString().isEmpty() || spinner_franquicia_origen.getSelectedItem().toString().isEmpty()
+                        || spinner_franquicia_destino.getSelectedItem().toString().isEmpty() || spinner_marca_vehiculo.getSelectedItem().toString().isEmpty()){
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Error, se deben rellenar todos los campos",Toast.LENGTH_SHORT).show();
+                }
                 // COMPROBAMOS FECHAS Y HORAS
-
+                pb_crear_reserva.setVisibility(View.VISIBLE);
                 if (!compruebaFecha(edt_fecha_inicio_alquiler.getText().toString())) {
+                    pb_crear_reserva.setVisibility(View.INVISIBLE);
                     Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fecha inicio alquiler incorrecta", Toast.LENGTH_SHORT).show();
                 }
                 if (!compruebaFecha(edt_fecha_fin_alquiler.getText().toString())) {
+                    pb_crear_reserva.setVisibility(View.INVISIBLE);
                     Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fecha fin alquiler incorrecta", Toast.LENGTH_SHORT).show();
                 }
                 if (!compruebaHora(edt_hora_inicio_alquiler.getText().toString())) {
+                    pb_crear_reserva.setVisibility(View.INVISIBLE);
                     Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Hora inicio alquiler incorrecta", Toast.LENGTH_SHORT).show();
                 }
                 if (!compruebaHora(edt_hora_fin_alquiler.getText().toString())) {
+                    pb_crear_reserva.setVisibility(View.INVISIBLE);
                     Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Hora fin alquiler incorrecta", Toast.LENGTH_SHORT).show();
                 }
                 if (compruebaFecha(edt_fecha_inicio_alquiler.getText().toString()) && compruebaFecha(edt_fecha_fin_alquiler.getText().toString())
@@ -109,57 +241,145 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     // Compruebo que la fecha de fin de reserva > fecha inicio reserva
                     // 1ºcaso--> Año inicio > año fin--> peta
                     if (Integer.parseInt(añoInicio) > Integer.parseInt(añoFin)) {
+                        pb_crear_reserva.setVisibility(View.INVISIBLE);
                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, años incorrectos", Toast.LENGTH_SHORT).show();
                     }
                     // 2ºcaso--> Estan en el mismo año--> Mes inicio >= mes fin
                     if (Integer.parseInt(añoInicio) == Integer.parseInt(añoFin)) {
                         // CASO 2.1: Mes fin < mes inicio-> peta
                         if (Integer.parseInt(mesInicio) > Integer.parseInt(mesFin)) {
+                            pb_crear_reserva.setVisibility(View.INVISIBLE);
                             Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, meses incorrectos", Toast.LENGTH_SHORT).show();
                         }
                         // CASO 2.2: Mes fin == Mes inicio--> comprobamos el dia
                         if (Integer.parseInt(mesInicio) == Integer.parseInt(mesFin)) {
                             if (Integer.parseInt(diaInicio) > Integer.parseInt(diaFin)) {
+                                pb_crear_reserva.setVisibility(View.INVISIBLE);
                                 Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, el dia de inicio no puede ser mayor que el de fin de alquiler", Toast.LENGTH_SHORT).show();
                             }
                             // CASO PENDIENTE : los dias son iguales, comparar horas.
                             if (Integer.parseInt(diaInicio) == Integer.parseInt(diaFin)) {
                                 // Si la horaInicio < horaFin
                                 if (Integer.parseInt(horaInicio) > Integer.parseInt(horaFin)) {
+                                    pb_crear_reserva.setVisibility(View.INVISIBLE);
                                     Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, la hora necesaria no es válida", Toast.LENGTH_SHORT).show();
                                 }
                                 // Si las horas son iguales--> comprueba los minutos
                                 if (Integer.parseInt(horaInicio) == Integer.parseInt(horaFin)) {
                                     if (Integer.parseInt(minutosInicio) > Integer.parseInt(minutosFin)) {
+                                        pb_crear_reserva.setVisibility(View.INVISIBLE);
                                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, los minutos son inválidos", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         }
                     }
+                    // Creamos reserva en firebase
+                    Random random = new Random();
+                    String numero_reserva = Integer.toString(random.nextInt(100000));
+                    String inicio_reserva = edt_fecha_inicio_alquiler.getText().toString() + " " + edt_hora_inicio_alquiler.getText().toString();
+                    String fin_reserva = edt_fecha_fin_alquiler.getText().toString() + " " + edt_hora_fin_alquiler.getText().toString();
+                    String marca = spinner_marca_vehiculo.getSelectedItem().toString();
+                    Map<String,Object> datosUsuario = new HashMap<String, Object>();
+                    Map<String, Object> datosReserva = new HashMap<String, Object>();
+                    datosReserva.put("numero reserva", numero_reserva);
+                    datosUsuario.put("numero reserva"+ Integer.toString(n),numero_reserva);
+                    n++;
+                    datosReserva.put("inicio reserva", inicio_reserva);
+                    datosReserva.put("fin reserva", fin_reserva);
+                    datosReserva.put("email", email);
+                    datosReserva.put("dni", tv_dni.getText().toString());
+                    datosReserva.put("nombre", tv_nombre.getText().toString());
+                    datosReserva.put("tipo", tv_tipo.getText().toString());
+                    datosReserva.put("matricula", tv_matricula.getText().toString());
+                    if (tv_tarifa.getText().toString().equals("no disponible")) {
+                        pb_crear_reserva.setVisibility(View.INVISIBLE);
+                        Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debido a vehículo no disponible", Toast.LENGTH_SHORT).show();
+                    } else if(tv_tarifa.getText().toString().equals("Error en tarifa")){
+                        pb_crear_reserva.setVisibility(View.INVISIBLE);
+                        Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debido a la tarifa", Toast.LENGTH_SHORT).show();
+                    } else if(tv_tarifa.getText().toString().equals("Tarifa")){
+                        pb_crear_reserva.setVisibility(View.INVISIBLE);
+                        Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debes calcular un presupuesto antes de crear una reserva", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        datosReserva.put("importe", tv_tarifa.getText().toString());
+                        // Insertamos en la base de datos
+                        cloudReference.collection("Usuarios").document(email).collection("Reservas").document(numero_reserva).set(datosReserva).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                pb_crear_reserva.setVisibility(View.INVISIBLE);
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Reserva creada correctamente", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                pb_crear_reserva.setVisibility(View.INVISIBLE);
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        // Actualizamos estado del vehiculo
+                        Map<String, Object> mapUpdate = new HashMap<String, Object>();
+                        mapUpdate.put("estado", "no disponible");
+                        cloudReference.collection(VEHICULOS).document(marca).update(mapUpdate);
+                        // Cargamos el numero de reserva en el usuario
+                        cloudReference.collection("Usuarios").document(email).collection("Datos personales").document(email).update(datosUsuario);
+                        // Pasamos a la siguiente actividad
+                        Intent intent = new Intent(ACT_4_FORMULARIO_RESERVA.this, ACT_3_PANTALLA_PRINCIPAL.class);
+                        intent.putExtra("numeroReserva", numero_reserva);
+                        startActivity(intent);
+                    }
                 }
-                // COMPROBAMOS QUE SELECCIONAMOS LAS FRANQUICIAS
-                /*
-                if(!spinnerValido(spinner_franquicia_origen) || !spinnerValido(spinner_franquicia_destino)){
-                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, se deben seleccionar las franquicias origen/destino", Toast.LENGTH_SHORT).show();
-                }
-
-                // COMPROBAMOS QUE SELECCIONAMOS UN MODELO
-
-                if(!spinnerValido(spinner_marca_vehiculo)){
-                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, se debe seleccionar una marca", Toast.LENGTH_SHORT).show();
-                } */
             }
         });
     }
 
     // Metodo privado que obtiene el modelo del vehiculo
-    private void obtenNombreModelo(FirebaseFirestore cloudReference, String Vehiculo, String marca, TextView tv_modelo){
+    private void obtenDatosMarca(FirebaseFirestore cloudReference, String Vehiculo, String marca, TextView tv_modelo, TextView tv_disponibilidad,
+                                 TextView tv_tarifa,TextView tv_matricula,int numero_dias,int numero_meses, int numero_años){
         cloudReference.collection(Vehiculo).document(marca).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.equals(MODELO)){
-                    tv_modelo.setText(documentSnapshot.get(MODELO).toString());
+                String modelo = documentSnapshot.getString("modelo");
+                String estado = documentSnapshot.getString("estado");
+                String tarifa = documentSnapshot.getString("tarifa");
+                String matricula = documentSnapshot.getString("matricula");
+                tv_modelo.setText(modelo);
+                tv_disponibilidad.setText(estado);
+                if (estado.equals("no disponible")) {
+                    tv_tarifa.setText("no disponible");
+                    tv_matricula.setText(matricula);
+                } if(estado.equals("disponible")){
+                    // CALCULAMOS LA TARIFA TOTAL
+                    if (numero_años == 0 && numero_meses == 0) {
+                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias;
+                        if (tarifaTotal1 > 0) {
+                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                            tv_tarifa.setText(tarifaTotal2 + "€");
+                        } else {
+                            tv_tarifa.setText("Error en tarifa");
+                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                        }
+                    } else if (numero_años == 0 && numero_meses != 0) {
+                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30;
+                        if (tarifaTotal1 > 0) {
+                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                            tv_tarifa.setText(tarifaTotal2 + "€");
+                        } else {
+                            tv_tarifa.setText("Error en tarifa");
+                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                        }
+                    } else if (numero_años != 0) {
+                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365;
+                        if (tarifaTotal1 > 0) {
+                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                            tv_tarifa.setText(tarifaTotal2 + "€");
+                        } else {
+                            tv_tarifa.setText("Error en tarifa");
+                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    tv_matricula.setText(matricula);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -169,13 +389,25 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
             }
         });
     }
-    // Metodo privado para comprobar que una franquicia no este vacia
-    private boolean spinnerValido(Spinner spinner){
-        if(spinner.getSelectedItem().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
+
+    // Metodo privado para obtener datos del usuario
+    private void obtenDatosUsuario(FirebaseFirestore cloudReference,TextView tv_dni,TextView tv_nombre, TextView tv_tipo){
+        cloudReference.collection("Usuarios").document(email).collection("Datos personales").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String dni = documentSnapshot.getString("dni");
+                String nombre = documentSnapshot.getString("nombre");
+                String tipo = documentSnapshot.getString("tipo");
+                tv_dni.setText(dni);
+                tv_nombre.setText(nombre);
+                tv_tipo.setText(tipo);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Fallo lectura datos usuario",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Metodo privado para comprobar la hora
@@ -193,21 +425,12 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
            //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Formato de hora inválido",Toast.LENGTH_SHORT).show();
             return false;
         }
+        // COMPROBAR QUE EL DIA SEA EL MISMO
         String horas = hora.substring(0,2);
         String minutos = hora.substring(3,5);
-        // FORMATO DE HORA
-        if(horaActual > Integer.parseInt(horas)) {
-            //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "La hora introducida no puede ser menor que la actual", Toast.LENGTH_SHORT).show();
-            return false;
-        }
         if (Integer.parseInt(horas) < 0 || Integer.parseInt(horas) > 24) {
                 Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Formato de hora invalido", Toast.LENGTH_SHORT).show();
                 return false;
-        }
-        // FORMATO DE MINUTOS
-        if(minutosActuales > Integer.parseInt(minutos)) {
-            //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Los minutos introducidos no puede ser menores que los actuales", Toast.LENGTH_SHORT).show();
-            return false;
         }
         if(Integer.parseInt(minutos) < 0 || Integer.parseInt(minutos) > 59){
             //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Formato de minutos invalido",Toast.LENGTH_SHORT).show();
@@ -238,24 +461,33 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         // CASO AÑO ACTUAL
         else if(Integer.parseInt(año) == 2020){
             int diaActual = fechaActual.get(Calendar.DAY_OF_MONTH);
-            if(diaActual <= Integer.parseInt(dia)){
-                if (Integer.parseInt(dia) < 01 || Integer.parseInt(dia) > 31) {
-                    //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Formato incorrecto de día", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            } else {
-                //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Error, no puede ser un dia del pasado",Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            int mesActual = fechaActual.get(Calendar.MONTH);
-            if(mesActual <= Integer.parseInt(mes)){
+            int mesActual = fechaActual.get(Calendar.MONTH)+1;
+            // CASO EN EL QUE LOS MESES SON IGUALES
+            if(mesActual == Integer.parseInt(mes)){
                 if (Integer.parseInt(mes) < 01 || Integer.parseInt(mes) > 12) {
                     //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Formato incorrecto de mes", Toast.LENGTH_SHORT).show();
                     return false;
                 }
-            } else {
+                // COMPROBAMOS QUE EL DIA QUE LE PASAMOS SEA MAYOR QUE EL ACTUAL
+                if(diaActual <= Integer.parseInt(dia)){
+                    if (Integer.parseInt(dia) < 01 || Integer.parseInt(dia) > 31) {
+                        //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Formato incorrecto de día", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                } else {
+                    //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Error, no puede ser un dia del pasado",Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                // CASO EN EL QUE EL MES QUE LE PASAMOS ES MENOR QUE EL ACTUAL--> NO SE PUEDE HACER RESERVA
+            } else if(mesActual > Integer.parseInt(mes)){
                 //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Error, no puede ser un mes del pasado",Toast.LENGTH_SHORT).show();
                 return false;
+                // CASO EN EL QUE EL MES QUE LE METEMOS ES MAYOR QUE EL MES ACTUAL-> NO HACE FALTA COMPROBAR DIA
+            } else if(mesActual < Integer.parseInt(mes)){
+                if (Integer.parseInt(mes) < 01 || Integer.parseInt(mes) > 12) {
+                    //Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Formato incorrecto de mes", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             }
         }
         // CASO AÑO 2021 O FUTURO

@@ -11,12 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rentcar">
-        <activity android:name=".ACT_4_FORMULARIO_RESERVA"
+        <activity android:name=".ACT_4_HISTORIAL"
+            android:label="HISTORIAL DE RESERVAS"
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL"></activity>
+        <activity
+            android:name=".ACT_4_FORMULARIO_RESERVA"
             android:label="FORMULARIO RESERVA"
-            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL">
-        </activity>
-        <activity android:name=".ACT_3_PANTALLA_PRINCIPAL"
-            android:label="MENU PRINCIPAL"/>
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL"></activity>
+        <activity
+            android:name=".ACT_3_PANTALLA_PRINCIPAL"
+            android:label="MENU PRINCIPAL" />
         <activity
             android:name=".ACT_1_PANTALLA_INICIO"
             android:label="RENTCAR">

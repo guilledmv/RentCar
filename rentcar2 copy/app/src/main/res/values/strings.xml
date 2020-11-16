@@ -26,6 +26,12 @@
     <string name="selecci_n_de_veh_culo">Selección de vehículo</string>
     <string name="crear_reserva">Crear reserva</string>
     <string name="franquicia_origen">Franquicia Origen</string>
+    <string name="franquicia_destino">Franquicia Destino</string>
+    <string name="tarifa">Tarifa</string>
+    <string name="calcular_presupuesto">Calcular Presupuesto</string>
+    <string name="modelo">Modelo</string>
+    <string name="disponibilidad">Disponibilidad</string>
+    <string name="historial_de_facturaci_n">historial de facturación</string>
     <string-array name="franquicias">
         <item></item>
         <item>Madrid</item>
