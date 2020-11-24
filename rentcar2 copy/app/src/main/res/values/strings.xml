@@ -32,6 +32,14 @@
     <string name="modelo">Modelo</string>
     <string name="disponibilidad">Disponibilidad</string>
     <string name="historial_de_facturaci_n">historial de facturación</string>
+    <string name="numero_reserva">Número reserva :</string>
+    <string name="nombre">Nombre :</string>
+    <string name="datos_reserva">Datos reserva</string>
+    <string name="tipo_cliente">Tipo cliente :</string>
+    <string name="email2">Email :</string>
+    <string name="inicio_reserva">Inicio reserva :</string>
+    <string name="fin_reserva">Fin reserva :</string>
+    <string name="importe">Importe :</string>
     <string-array name="franquicias">
         <item></item>
         <item>Madrid</item>

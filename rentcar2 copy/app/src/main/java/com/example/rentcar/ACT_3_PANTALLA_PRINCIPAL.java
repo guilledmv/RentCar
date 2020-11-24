@@ -18,7 +18,7 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
      */
 
     // Variable email
-    private String email,n_reserva;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
         btn_borrar_reserva = findViewById(R.id.btn_borrar_reserva_ACT_3);
         progressBar = findViewById(R.id.pb_ACT_3_PANTALLA_PRINCIPAL);
         email = getIntent().getStringExtra("email");
-        n_reserva = getIntent().getStringExtra("numeroReserva");
         // Click en realizar reserva--> Abre formulario
         btn_realizar_reserva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +46,7 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this,ACT_4_HISTORIAL.class);
-                intent.putExtra("numeroReserva",n_reserva);
+                intent.putExtra("email",email);
                 startActivity(intent);
             }
         });

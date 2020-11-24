@@ -349,18 +349,26 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                 if (estado.equals("no disponible")) {
                     tv_tarifa.setText("no disponible");
                     tv_matricula.setText(matricula);
-                } if(estado.equals("disponible")){
+                } if(estado.equals("disponible")) {
                     // CALCULAMOS LA TARIFA TOTAL
                     if (numero_años == 0 && numero_meses == 0) {
-                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias;
-                        if (tarifaTotal1 > 0) {
+                        // MINIMO CONTAMOS UN DIA PARA EL ALQUILER
+                        if(numero_dias == 0){
+                            int tarifaTotal1 = Integer.parseInt(tarifa);
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
                             tv_tarifa.setText(tarifaTotal2 + "€");
+                            // TENEMOS VARIOS DIAS
                         } else {
-                            tv_tarifa.setText("Error en tarifa");
-                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias;
+                            if (tarifaTotal1 > 0) {
+                                String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            } else {
+                                tv_tarifa.setText("Error en tarifa");
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    } else if (numero_años == 0 && numero_meses != 0) {
+                    } if (numero_años == 0 && numero_meses != 0) {
                         int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
@@ -369,7 +377,7 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                             tv_tarifa.setText("Error en tarifa");
                             Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
                         }
-                    } else if (numero_años != 0) {
+                    } if (numero_años != 0) {
                         int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
