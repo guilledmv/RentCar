@@ -24,8 +24,8 @@
         android:theme="@style/Theme.Rentcar" >
         <activity
             android:name="com.example.rentcar.ACT_4_HISTORIAL"
-            android:label="HISTORIAL DE RESERVAS"
-            android:parentActivityName="com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL" />
+            android:label="HISTORIAL DE RESERVAS" >
+        </activity>
         <activity
             android:name="com.example.rentcar.ACT_4_FORMULARIO_RESERVA"
             android:label="FORMULARIO RESERVA"

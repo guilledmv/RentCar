@@ -34,11 +34,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android-custom-view/Users/guillermodemiguelvillanueva/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.2.0/13e8ff89631c2e101eb6bddd12c2fb4bbd74b15d/appcompat-1.2.0-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_SELECTED" value="AppCompatEditText" />
+    <property name="android-custom-view/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/AdapterView.java_SELECTED" value="AdapterView" />
     <property name="android-custom-view/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/EditText.java_SELECTED" value="EditText" />
     <property name="android-custom-view/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="multi-representation-preview/Users/guillermodemiguelvillanueva/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.2.0/13e8ff89631c2e101eb6bddd12c2fb4bbd74b15d/appcompat-1.2.0-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
     <property name="multi-representation-preview/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/AdapterView.java_selected" value="Custom views" />
     <property name="multi-representation-preview/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/EditText.java_selected" value="Custom views" />
     <property name="multi-representation-preview/Users/guillermodemiguelvillanueva/Library/Android/sdk/sources/android-30/android/widget/TextView.java_selected" value="Custom views" />
@@ -149,61 +151,50 @@
     </state>
     <state x="100" y="123" width="1240" height="677" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1605349034779" />
     <state x="100" y="124" width="1240" height="676" key="AVDManager/0.25.1440.875@0.25.1440.875" timestamp="1605720884162" />
-    <state x="542" y="264" key="AndroidCreateXmlResourceDialog" timestamp="1606235728592">
+    <state x="542" y="264" key="AndroidCreateXmlResourceDialog" timestamp="1606429943133">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="542" y="263" key="AndroidCreateXmlResourceDialog/0.23.1440.877@0.23.1440.877" timestamp="1605460722920" />
-    <state x="542" y="264" key="AndroidCreateXmlResourceDialog/0.25.1440.875@0.25.1440.875" timestamp="1606235728592" />
-    <state width="1396" height="228" key="GridCell.Tab.0.bottom" timestamp="1605718800687">
+    <state x="542" y="264" key="AndroidCreateXmlResourceDialog/0.25.1440.875@0.25.1440.875" timestamp="1606429943133" />
+    <state width="1396" height="2" key="GridCell.Tab.0.bottom" timestamp="1606413327587">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605465352231" />
-    <state width="1396" height="228" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1605718800687" />
-    <state width="1396" height="228" key="GridCell.Tab.0.center" timestamp="1605718800686">
+    <state width="1396" height="2" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
+    <state width="1396" height="2" key="GridCell.Tab.0.center" timestamp="1606413327586">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1605465352229" />
-    <state width="1396" height="228" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1605718800686" />
-    <state width="1396" height="228" key="GridCell.Tab.0.left" timestamp="1605718800686">
+    <state width="1396" height="2" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1606413327586" />
+    <state width="1396" height="2" key="GridCell.Tab.0.left" timestamp="1606413327586">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1605465352228" />
-    <state width="1396" height="228" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1605718800686" />
-    <state width="1396" height="228" key="GridCell.Tab.0.right" timestamp="1605718800686">
+    <state width="1396" height="2" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1606413327586" />
+    <state width="1396" height="2" key="GridCell.Tab.0.right" timestamp="1606413327587">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1605465352230" />
-    <state width="1396" height="228" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1605718800686" />
-    <state width="1396" height="2" key="GridCell.Tab.1.bottom" timestamp="1605653827243">
+    <state width="1396" height="2" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
+    <state width="1396" height="2" key="GridCell.Tab.1.bottom" timestamp="1606413327588">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605465352234" />
-    <state width="1396" height="2" key="GridCell.Tab.1.bottom/0.25.1440.875@0.25.1440.875" timestamp="1605653827243" />
-    <state width="1396" height="2" key="GridCell.Tab.1.center" timestamp="1605653827243">
+    <state width="1396" height="2" key="GridCell.Tab.1.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
+    <state width="1396" height="2" key="GridCell.Tab.1.center" timestamp="1606413327588">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1605465352232" />
-    <state width="1396" height="2" key="GridCell.Tab.1.center/0.25.1440.875@0.25.1440.875" timestamp="1605653827243" />
-    <state width="1396" height="2" key="GridCell.Tab.1.left" timestamp="1605653827243">
+    <state width="1396" height="2" key="GridCell.Tab.1.center/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
+    <state width="1396" height="2" key="GridCell.Tab.1.left" timestamp="1606413327587">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1605465352231" />
-    <state width="1396" height="2" key="GridCell.Tab.1.left/0.25.1440.875@0.25.1440.875" timestamp="1605653827243" />
-    <state width="1396" height="2" key="GridCell.Tab.1.right" timestamp="1605653827243">
+    <state width="1396" height="2" key="GridCell.Tab.1.left/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
+    <state width="1396" height="2" key="GridCell.Tab.1.right" timestamp="1606413327588">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1605465352233" />
-    <state width="1396" height="2" key="GridCell.Tab.1.right/0.25.1440.875@0.25.1440.875" timestamp="1605653827243" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/rentcar/ACT_4_FORMULARIO_RESERVA.java</url>
-          <line>185</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state width="1396" height="2" key="GridCell.Tab.1.right/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
   </component>
 </project>

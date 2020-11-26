@@ -1,5 +1,11 @@
 com/example/rentcar/ACT_4_HISTORIAL.java
  com.example.rentcar.ACT_4_HISTORIAL
+ com.example.rentcar.ACT_4_HISTORIAL$1
+ com.example.rentcar.ACT_4_HISTORIAL$2
+ com.example.rentcar.ACT_4_HISTORIAL$3
+ com.example.rentcar.ACT_4_HISTORIAL$4
+ com.example.rentcar.ACT_4_HISTORIAL$5
+ com.example.rentcar.ACT_4_HISTORIAL$6
 com/example/rentcar/ACT_1_PANTALLA_INICIO.java
  com.example.rentcar.ACT_1_PANTALLA_INICIO
  com.example.rentcar.ACT_1_PANTALLA_INICIO$1
@@ -23,12 +29,13 @@ com/example/rentcar/ACT_4_FORMULARIO_RESERVA.java
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$1
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$2
- com.example.rentcar.ACT_4_FORMULARIO_RESERVA$2$1
- com.example.rentcar.ACT_4_FORMULARIO_RESERVA$2$2
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$3
+ com.example.rentcar.ACT_4_FORMULARIO_RESERVA$3$1
+ com.example.rentcar.ACT_4_FORMULARIO_RESERVA$3$2
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$4
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$5
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$6
+ com.example.rentcar.ACT_4_FORMULARIO_RESERVA$7
 com/example/rentcar/ACT_3_PANTALLA_PRINCIPAL.java
  com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL
  com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$1

@@ -37,13 +37,12 @@
 24        android:theme="@style/Theme.Rentcar" >
 24-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:13:9-45
 25        <activity
-25-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-16:79
+25-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-16:20
 26            android:name="com.example.rentcar.ACT_4_HISTORIAL"
 26-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:19-50
-27            android:label="HISTORIAL DE RESERVAS"
+27            android:label="HISTORIAL DE RESERVAS" >
 27-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:15:13-50
-28            android:parentActivityName="com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL" />
-28-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:16:13-67
+28        </activity>
 29        <activity
 29-->/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:17:9-20:79
 30            android:name="com.example.rentcar.ACT_4_FORMULARIO_RESERVA"

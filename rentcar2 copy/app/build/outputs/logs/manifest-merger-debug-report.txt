@@ -113,9 +113,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/guil
 	android:theme
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:13:9-45
 activity#com.example.rentcar.ACT_4_HISTORIAL
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-16:79
-	android:parentActivityName
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:16:13-67
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-16:20
 	android:label
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:15:13-50
 	android:name

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -44,10 +46,12 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
 
     private Calendar fechaActual = Calendar.getInstance();
 
-
     private int numero_dias;
     private int numero_meses;
     private int numero_años;
+
+    private CheckBox cb_automatico_porsche,cb_calefactables_porsche,cb_techo_panoramico_porsche,
+            cb_version_deportiva_porsche,cb_navegador_seat,cb_control_crucero_seat,cb_sensores_seat;
 
     // Constantes para acceder a la base de datos firebase
     private final String VEHICULOS = "Vehículos";
@@ -55,7 +59,10 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
     private final String PORSCHE = "Porsche";
     private final String SEAT = "Seat";
     private final String MODELO = "modelo";
-
+    private final String AUTOMATICO = "automatico";
+    private final String CALEFACTABLE = "calefactables";
+    private final String TECHO = "techo";
+    private final String VERSION = "deportivo";
 
     // Variables firebase
 
@@ -66,8 +73,8 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
 
     // Variable email
     private String email;
-    private int n = 1;
 
+    private List <Integer> numerosReserva = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +103,36 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         tv_tipo = findViewById(R.id.tv_tipo_ACT_4_FORMULARIO);
         pb_calcular_presupuesto = findViewById(R.id.pb_calcular_presupuesto_ACT_4_FORMULARIO);
         pb_crear_reserva = findViewById(R.id.pb_crear_reserva_ACT_4_FORMULARIO_RESERVA);
+        cb_automatico_porsche = findViewById(R.id.cb_automatico_porsche);
+        cb_calefactables_porsche = findViewById(R.id.cb_calefactables_porsche);
+        cb_techo_panoramico_porsche = findViewById(R.id.cb_techo_panoramico_porsche);
+        cb_version_deportiva_porsche = findViewById(R.id.cb_version_deportiva_porsche);
+        cb_navegador_seat = findViewById(R.id.cb_navegador_seat);
+        cb_control_crucero_seat = findViewById(R.id.cb_control_crucero_seat);
+        cb_sensores_seat = findViewById(R.id.cb_sensores_seat);
         mAuth = FirebaseAuth.getInstance();
         usuarioActual = mAuth.getCurrentUser();
         cloudReference = FirebaseFirestore.getInstance();
         email = getIntent().getStringExtra("email");
+
+        spinner_marca_vehiculo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object marca1 = parent.getItemAtPosition(position);
+                String marca = marca1.toString();
+                if (marca.equals(PORSCHE)) {
+                    escondeExtrasSeat();
+                    enseñaExtrasPorsche();
+                } else if(marca.equals(SEAT)) {
+                    escondeExtrasPorsche();
+                    enseñaExtrasSeat();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         // Cuando pulsamos el boton de crear presupuesto
         btn_crear_presupuesto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,10 +236,10 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // SI EXISTE ALGUN CAMPO VACIO--> ERROR NO SE PUEDE CREAR RESERVA
-                if(edt_fecha_inicio_alquiler.getText().toString().isEmpty() || edt_fecha_fin_alquiler.getText().toString().isEmpty() ||
+                if (edt_fecha_inicio_alquiler.getText().toString().isEmpty() || edt_fecha_fin_alquiler.getText().toString().isEmpty() ||
                         edt_hora_inicio_alquiler.getText().toString().isEmpty() || edt_hora_fin_alquiler.getText().toString().isEmpty() || spinner_franquicia_origen.getSelectedItem().toString().isEmpty()
-                        || spinner_franquicia_destino.getSelectedItem().toString().isEmpty() || spinner_marca_vehiculo.getSelectedItem().toString().isEmpty()){
-                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this,"Error, se deben rellenar todos los campos",Toast.LENGTH_SHORT).show();
+                        || spinner_franquicia_destino.getSelectedItem().toString().isEmpty() || spinner_marca_vehiculo.getSelectedItem().toString().isEmpty()) {
+                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, se deben rellenar todos los campos", Toast.LENGTH_SHORT).show();
                 }
                 // COMPROBAMOS FECHAS Y HORAS
                 pb_crear_reserva.setVisibility(View.VISIBLE);
@@ -280,11 +313,10 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     String inicio_reserva = edt_fecha_inicio_alquiler.getText().toString() + " " + edt_hora_inicio_alquiler.getText().toString();
                     String fin_reserva = edt_fecha_fin_alquiler.getText().toString() + " " + edt_hora_fin_alquiler.getText().toString();
                     String marca = spinner_marca_vehiculo.getSelectedItem().toString();
-                    Map<String,Object> datosUsuario = new HashMap<String, Object>();
+                    Map<String, Object> datosUsuario = new HashMap<String, Object>();
                     Map<String, Object> datosReserva = new HashMap<String, Object>();
                     datosReserva.put("numero reserva", numero_reserva);
-                    datosUsuario.put("numero reserva"+ Integer.toString(n),numero_reserva);
-                    n++;
+                    datosUsuario.put("numero reserva" + Integer.toString(1), numero_reserva);
                     datosReserva.put("inicio reserva", inicio_reserva);
                     datosReserva.put("fin reserva", fin_reserva);
                     datosReserva.put("email", email);
@@ -292,17 +324,38 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     datosReserva.put("nombre", tv_nombre.getText().toString());
                     datosReserva.put("tipo", tv_tipo.getText().toString());
                     datosReserva.put("matricula", tv_matricula.getText().toString());
+                    if (marca.equals(PORSCHE)) {
+                        if (cb_automatico_porsche.isChecked()) {
+                            datosReserva.put(AUTOMATICO, "SI");
+                        } else {
+                            datosReserva.put(AUTOMATICO, "NO");
+                        }
+                        if (cb_calefactables_porsche.isChecked()) {
+                            datosReserva.put(CALEFACTABLE, "SI");
+                        } else {
+                            datosReserva.put(CALEFACTABLE, "NO");
+                        }
+                        if (cb_techo_panoramico_porsche.isChecked()) {
+                            datosReserva.put(TECHO, "SI");
+                        } else {
+                            datosReserva.put(TECHO, "NO");
+                        }
+                        if (cb_version_deportiva_porsche.isChecked()) {
+                            datosReserva.put(VERSION, "SI");
+                        } else {
+                            datosReserva.put(VERSION, "NO");
+                        }
+                    }
                     if (tv_tarifa.getText().toString().equals("no disponible")) {
                         pb_crear_reserva.setVisibility(View.INVISIBLE);
                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debido a vehículo no disponible", Toast.LENGTH_SHORT).show();
-                    } else if(tv_tarifa.getText().toString().equals("Error en tarifa")){
+                    } else if (tv_tarifa.getText().toString().equals("Error en tarifa")) {
                         pb_crear_reserva.setVisibility(View.INVISIBLE);
                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debido a la tarifa", Toast.LENGTH_SHORT).show();
-                    } else if(tv_tarifa.getText().toString().equals("Tarifa")){
+                    } else if (tv_tarifa.getText().toString().equals("Tarifa")) {
                         pb_crear_reserva.setVisibility(View.INVISIBLE);
                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debes calcular un presupuesto antes de crear una reserva", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         datosReserva.put("importe", tv_tarifa.getText().toString());
                         // Insertamos en la base de datos
                         cloudReference.collection("Usuarios").document(email).collection("Reservas").document(numero_reserva).set(datosReserva).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -349,11 +402,12 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                 if (estado.equals("no disponible")) {
                     tv_tarifa.setText("no disponible");
                     tv_matricula.setText(matricula);
-                } if(estado.equals("disponible")) {
-                    // CALCULAMOS LA TARIFA TOTAL
+                }
+                if (estado.equals("disponible")) {
+                    // CALCULAMOS LA TARIFA TOTAL BASE
                     if (numero_años == 0 && numero_meses == 0) {
                         // MINIMO CONTAMOS UN DIA PARA EL ALQUILER
-                        if(numero_dias == 0){
+                        if (numero_dias == 0) {
                             int tarifaTotal1 = Integer.parseInt(tarifa);
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
                             tv_tarifa.setText(tarifaTotal2 + "€");
@@ -368,7 +422,8 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                                 Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    } if (numero_años == 0 && numero_meses != 0) {
+                    }
+                    if (numero_años == 0 && numero_meses != 0) {
                         int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
@@ -377,7 +432,8 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                             tv_tarifa.setText("Error en tarifa");
                             Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
                         }
-                    } if (numero_años != 0) {
+                    }
+                    if (numero_años != 0) {
                         int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
@@ -388,6 +444,104 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                         }
                     }
                     tv_matricula.setText(matricula);
+                    // AÑADIMOS LOS EXTRAS DEPENDIENDO DEL MODELO
+                    // CASO MARCA PORSCHE
+                    if (marca.equals(PORSCHE)) {
+                        // SI NO TIENE NINGUN EXTRA-> TARIFA NORMAL
+                        if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                        } // SI TIENE EXTRA AUTOMATICO-> TARIFA + 20
+
+                        if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 20;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA TECHO -> TARIFA + 5
+
+                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 5;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA CALEFACTABLES
+
+                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 10;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA VERSION DEPORTIVA
+
+                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 15;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMATICO + TECHO
+
+                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLES
+
+                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 30;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMACTICO + VERSION DEPORTIVA
+
+                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 35;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA TECHO + CALEFACTABLES
+
+                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 15;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA TECHO + VERSION DEPORTIVA
+
+                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA CALEFACTABLE + VERSION DEPORTIVA
+
+                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMATICO + TECHO + CALEFACTABLE
+
+                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                !cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 35;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMATICO + TECHO + VERSION DEPORTIVA
+
+                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 40;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLE + VERSION DEPORTIVA
+
+                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 45;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // SI TIENE EXTRA TECHO + CALEFACTABLE + VERSION DEPORTIVA
+
+                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 30;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        } // FULL EXTRAS
+
+                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                                cb_version_deportiva_porsche.isChecked()) {
+                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 50;
+                            tv_tarifa.setText(Integer.toString(tarifafinal));
+                        }
+                    }
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -511,4 +665,31 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         }
         return true;
     }
+    // METODO AUXILIAR QUE HACE VISIBLES LOS EXTRAS DEL PORSCHE
+    public void enseñaExtrasPorsche(){
+        cb_automatico_porsche.setVisibility(View.VISIBLE);
+        cb_calefactables_porsche.setVisibility(View.VISIBLE);
+        cb_techo_panoramico_porsche.setVisibility(View.VISIBLE);
+        cb_version_deportiva_porsche.setVisibility(View.VISIBLE);
+    }
+    // METODO AUXILIAR QUE HACE INVISIBLES LOS EXTRAS DEL PORSCHE
+    public void escondeExtrasPorsche(){
+        cb_automatico_porsche.setVisibility(View.INVISIBLE);
+        cb_calefactables_porsche.setVisibility(View.INVISIBLE);
+        cb_techo_panoramico_porsche.setVisibility(View.INVISIBLE);
+        cb_version_deportiva_porsche.setVisibility(View.INVISIBLE);
+    }
+    // METODO AUXILIAR QUE HACE VISIBLES LOS EXTRAS SEAT
+    public void enseñaExtrasSeat(){
+        cb_navegador_seat.setVisibility(View.VISIBLE);
+        cb_sensores_seat.setVisibility(View.VISIBLE);
+        cb_control_crucero_seat.setVisibility(View.VISIBLE);
+    }
+    // METODO AUXILIAR QUE HACE INVISIBLES LOS EXTRAS SEAT
+    public void escondeExtrasSeat(){
+        cb_navegador_seat.setVisibility(View.INVISIBLE);
+        cb_sensores_seat.setVisibility(View.INVISIBLE);
+        cb_control_crucero_seat.setVisibility(View.INVISIBLE);
+    }
+
 }
