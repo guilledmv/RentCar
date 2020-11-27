@@ -41,13 +41,16 @@
     <string name="fin_reserva">Fin reserva :</string>
     <string name="importe">Importe :</string>
     <string name="matricula_veh_culo">Matricula vehículo :</string>
-    <string name="autom_tico">Automático (+20)</string>
-    <string name="asientos_calefactables">Asientos calefactables (+10)</string>
-    <string name="techo_panor_mico">Techo panorámico (+5)</string>
-    <string name="version_deportiva">Version deportiva (+15)</string>
-    <string name="navegador_15">Navegador (+15)</string>
-    <string name="control_crucero_10">Control crucero (+10)</string>
-    <string name="sensores_aparcamiento_5">Sensores aparcamiento (+5)</string>
+    <string name="autom_tico">Automático (+20€)</string>
+    <string name="asientos_calefactables">Asientos calefactables (+10€)</string>
+    <string name="techo_panor_mico">Techo panorámico (+5€)</string>
+    <string name="version_deportiva">Version deportiva (+15€)</string>
+    <string name="navegador_15">Navegador (+15€)</string>
+    <string name="control_crucero_10">Control crucero (+10€)</string>
+    <string name="sensores_aparcamiento_5">Sensores aparcamiento (+5€)</string>
+    <string name="navegador_10">Navegador (+10€)</string>
+    <string name="bluetooth_5">Bluetooth (+5€)</string>
+    <string name="aire_acondicionado_15">Aire acondicionado (+15€)</string>
     <string-array name="franquicias">
         <item></item>
         <item>Madrid</item>

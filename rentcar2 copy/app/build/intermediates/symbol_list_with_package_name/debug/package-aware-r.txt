@@ -1724,9 +1724,12 @@ id btn_realizar_reserva_ACT_3
 id buttonPanel
 id cache_measures
 id cancel_button
+id cb_aire_dacia
 id cb_automatico_porsche
+id cb_bluetooth_dacia
 id cb_calefactables_porsche
 id cb_control_crucero_seat
+id cb_navegador_dacia
 id cb_navegador_seat
 id cb_sensores_seat
 id cb_techo_panoramico_porsche
@@ -2254,11 +2257,13 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string aire_acondicionado_15
 string alquila_el_veh_culo_que_mejor_se_ajusta_a_ti
 string app_name
 string appbar_scrolling_view_behavior
 string asientos_calefactables
 string autom_tico
+string bluetooth_5
 string borrar_reserva
 string bottom_sheet_behavior
 string calcular_presupuesto
@@ -2366,6 +2371,7 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string navegador_10
 string navegador_15
 string nombre
 string nombre_completo

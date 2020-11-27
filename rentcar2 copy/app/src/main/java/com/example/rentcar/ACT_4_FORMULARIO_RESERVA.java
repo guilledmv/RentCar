@@ -51,7 +51,8 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
     private int numero_años;
 
     private CheckBox cb_automatico_porsche,cb_calefactables_porsche,cb_techo_panoramico_porsche,
-            cb_version_deportiva_porsche,cb_navegador_seat,cb_control_crucero_seat,cb_sensores_seat;
+            cb_version_deportiva_porsche,cb_navegador_seat,cb_control_crucero_seat,cb_sensores_seat,
+            cb_navegador_dacia,cb_bluetooth_dacia,cb_aire_dacia;
 
     // Constantes para acceder a la base de datos firebase
     private final String VEHICULOS = "Vehículos";
@@ -63,6 +64,11 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
     private final String CALEFACTABLE = "calefactables";
     private final String TECHO = "techo";
     private final String VERSION = "deportivo";
+    private final String NAVEGADOR = "navegador";
+    private final String CONTROL_CRUCERO = "control crucero";
+    private final String SENSORES = "sensores";
+    private final String BLUETOOTH = "bluetooth";
+    private final String AIRE_ACONDICIONADO = "aire acondicionado";
 
     // Variables firebase
 
@@ -110,6 +116,9 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         cb_navegador_seat = findViewById(R.id.cb_navegador_seat);
         cb_control_crucero_seat = findViewById(R.id.cb_control_crucero_seat);
         cb_sensores_seat = findViewById(R.id.cb_sensores_seat);
+        cb_navegador_dacia = findViewById(R.id.cb_navegador_dacia);
+        cb_bluetooth_dacia = findViewById(R.id.cb_bluetooth_dacia);
+        cb_aire_dacia = findViewById(R.id.cb_aire_dacia);
         mAuth = FirebaseAuth.getInstance();
         usuarioActual = mAuth.getCurrentUser();
         cloudReference = FirebaseFirestore.getInstance();
@@ -122,13 +131,18 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                 String marca = marca1.toString();
                 if (marca.equals(PORSCHE)) {
                     escondeExtrasSeat();
+                    escondeExtrasDacia();
                     enseñaExtrasPorsche();
                 } else if(marca.equals(SEAT)) {
                     escondeExtrasPorsche();
+                    escondeExtrasDacia();
                     enseñaExtrasSeat();
+                } else if(marca.equals(DACIA)){
+                    escondeExtrasPorsche();
+                    escondeExtrasSeat();
+                    enseñaExtrasDacia();
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -324,6 +338,8 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     datosReserva.put("nombre", tv_nombre.getText().toString());
                     datosReserva.put("tipo", tv_tipo.getText().toString());
                     datosReserva.put("matricula", tv_matricula.getText().toString());
+                    // AÑADIMOS INFO A LA BBDD SI ESTAN AÑADIENDO EXTRAS
+                    // CASO EXTRAS PORSCHE
                     if (marca.equals(PORSCHE)) {
                         if (cb_automatico_porsche.isChecked()) {
                             datosReserva.put(AUTOMATICO, "SI");
@@ -346,6 +362,43 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                             datosReserva.put(VERSION, "NO");
                         }
                     }
+                    // CASO EXTRAS SEAT
+                    if(marca.equals(SEAT)){
+                        if(cb_navegador_seat.isChecked()){
+                            datosReserva.put(NAVEGADOR,"SI");
+                        } else {
+                            datosReserva.put(NAVEGADOR,"NO");
+                        }
+                        if(cb_control_crucero_seat.isChecked()){
+                            datosReserva.put(CONTROL_CRUCERO,"SI");
+                        } else {
+                            datosReserva.put(CONTROL_CRUCERO,"NO");
+                        }
+                        if(cb_sensores_seat.isChecked()){
+                            datosReserva.put(SENSORES,"SI");
+                        } else {
+                            datosReserva.put(SENSORES,"NO");
+                        }
+                    }
+                    // CASO EXTRAS DACIA
+                    if(marca.equals(DACIA)){
+                        if(cb_navegador_dacia.isChecked()){
+                            datosReserva.put(NAVEGADOR,"SI");
+                        } else {
+                            datosReserva.put(NAVEGADOR,"NO");
+                        }
+                        if(cb_bluetooth_dacia.isChecked()){
+                            datosReserva.put(BLUETOOTH,"SI");
+                        } else {
+                            datosReserva.put(BLUETOOTH,"NO");
+                        }
+                        if(cb_aire_dacia.isChecked()){
+                            datosReserva.put(AIRE_ACONDICIONADO,"SI");
+                        } else {
+                            datosReserva.put(AIRE_ACONDICIONADO,"NO");
+                        }
+                    }
+
                     if (tv_tarifa.getText().toString().equals("no disponible")) {
                         pb_crear_reserva.setVisibility(View.INVISIBLE);
                         Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Fallo al crear reserva, debido a vehículo no disponible", Toast.LENGTH_SHORT).show();
@@ -404,16 +457,17 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     tv_matricula.setText(matricula);
                 }
                 if (estado.equals("disponible")) {
-                    // CALCULAMOS LA TARIFA TOTAL BASE
+                    int extra = calculaExtra(marca);
+                    // CALCULAMOS LA TARIFA TOTAL
                     if (numero_años == 0 && numero_meses == 0) {
                         // MINIMO CONTAMOS UN DIA PARA EL ALQUILER
                         if (numero_dias == 0) {
-                            int tarifaTotal1 = Integer.parseInt(tarifa);
+                            int tarifaTotal1 = Integer.parseInt(tarifa) + extra;
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
                             tv_tarifa.setText(tarifaTotal2 + "€");
                             // TENEMOS VARIOS DIAS
                         } else {
-                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias;
+                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias + extra;
                             if (tarifaTotal1 > 0) {
                                 String tarifaTotal2 = Integer.toString(tarifaTotal1);
                                 tv_tarifa.setText(tarifaTotal2 + "€");
@@ -424,7 +478,7 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                         }
                     }
                     if (numero_años == 0 && numero_meses != 0) {
-                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30;
+                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30 + extra;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
                             tv_tarifa.setText(tarifaTotal2 + "€");
@@ -434,7 +488,7 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                         }
                     }
                     if (numero_años != 0) {
-                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365;
+                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365 + extra;
                         if (tarifaTotal1 > 0) {
                             String tarifaTotal2 = Integer.toString(tarifaTotal1);
                             tv_tarifa.setText(tarifaTotal2 + "€");
@@ -444,104 +498,6 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                         }
                     }
                     tv_matricula.setText(matricula);
-                    // AÑADIMOS LOS EXTRAS DEPENDIENDO DEL MODELO
-                    // CASO MARCA PORSCHE
-                    if (marca.equals(PORSCHE)) {
-                        // SI NO TIENE NINGUN EXTRA-> TARIFA NORMAL
-                        if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                        } // SI TIENE EXTRA AUTOMATICO-> TARIFA + 20
-
-                        if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 20;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA TECHO -> TARIFA + 5
-
-                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 5;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA CALEFACTABLES
-
-                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 10;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA VERSION DEPORTIVA
-
-                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 15;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMATICO + TECHO
-
-                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLES
-
-                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 30;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMACTICO + VERSION DEPORTIVA
-
-                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 35;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA TECHO + CALEFACTABLES
-
-                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 15;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA TECHO + VERSION DEPORTIVA
-
-                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA CALEFACTABLE + VERSION DEPORTIVA
-
-                        else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 25;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMATICO + TECHO + CALEFACTABLE
-
-                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                !cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 35;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMATICO + TECHO + VERSION DEPORTIVA
-
-                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 40;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLE + VERSION DEPORTIVA
-
-                        else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 45;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // SI TIENE EXTRA TECHO + CALEFACTABLE + VERSION DEPORTIVA
-
-                        else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 30;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        } // FULL EXTRAS
-
-                        else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
-                                cb_version_deportiva_porsche.isChecked()) {
-                            int tarifafinal = Integer.parseInt(tv_tarifa.getText().toString()) + 50;
-                            tv_tarifa.setText(Integer.toString(tarifafinal));
-                        }
-                    }
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -690,6 +646,176 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         cb_navegador_seat.setVisibility(View.INVISIBLE);
         cb_sensores_seat.setVisibility(View.INVISIBLE);
         cb_control_crucero_seat.setVisibility(View.INVISIBLE);
+    }
+    // METODO AUXILIAR QUE HACE VISIBLES LOS EXTRAS DACIA
+    public void enseñaExtrasDacia(){
+        cb_navegador_dacia.setVisibility(View.VISIBLE);
+        cb_bluetooth_dacia.setVisibility(View.VISIBLE);
+        cb_aire_dacia.setVisibility(View.VISIBLE);
+    }
+    // METODO AUXILIAR QUE HACE VISIBLES LOS EXTRAS DACIA
+    public void escondeExtrasDacia(){
+        cb_navegador_dacia.setVisibility(View.INVISIBLE);
+        cb_bluetooth_dacia.setVisibility(View.INVISIBLE);
+        cb_aire_dacia.setVisibility(View.INVISIBLE);
+    }
+    // METODO AUXILIAR QUE CALCULA EL EXTRA A SUMA EN EL COSTE DE LA TARIFA
+    private int calculaExtra(String marca){
+
+    // AÑADIMOS LOS EXTRAS DEPENDIENDO DEL MODELO
+
+        // CASO MARCA PORSCHE
+        if (marca.equals(PORSCHE)) {
+            // SI NO TIENE NINGUN EXTRA-> TARIFA NORMAL
+            if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 0;
+            } // SI TIENE EXTRA AUTOMATICO-> TARIFA + 20
+
+            if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 20;
+            } // SI TIENE EXTRA TECHO -> TARIFA + 5
+
+            else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 5;
+            } // SI TIENE EXTRA CALEFACTABLES
+
+            else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 10;
+            } // SI TIENE EXTRA VERSION DEPORTIVA
+
+            else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 15;
+            } // SI TIENE EXTRA AUTOMATICO + TECHO
+
+            else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 25;
+            } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLES
+
+            else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+               return 30;
+            } // SI TIENE EXTRA AUTOMACTICO + VERSION DEPORTIVA
+
+            else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 35;
+            } // SI TIENE EXTRA TECHO + CALEFACTABLES
+
+            else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 15;
+            } // SI TIENE EXTRA TECHO + VERSION DEPORTIVA
+
+            else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 25;
+            } // SI TIENE EXTRA CALEFACTABLE + VERSION DEPORTIVA
+
+            else if (!cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 25;
+            } // SI TIENE EXTRA AUTOMATICO + TECHO + CALEFACTABLE
+
+            else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    !cb_version_deportiva_porsche.isChecked()) {
+                return 35;
+            } // SI TIENE EXTRA AUTOMATICO + TECHO + VERSION DEPORTIVA
+
+            else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && !cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 40;
+            } // SI TIENE EXTRA AUTOMATICO + CALEFACTABLE + VERSION DEPORTIVA
+
+            else if (cb_automatico_porsche.isChecked() && !cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 45;
+            } // SI TIENE EXTRA TECHO + CALEFACTABLE + VERSION DEPORTIVA
+
+            else if (!cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 30;
+            } // FULL EXTRAS
+
+            else if (cb_automatico_porsche.isChecked() && cb_techo_panoramico_porsche.isChecked() && cb_calefactables_porsche.isChecked() &&
+                    cb_version_deportiva_porsche.isChecked()) {
+                return 50;
+            }
+        // CASO MARCA SEAT
+
+        } else if(marca.equals(SEAT)){
+            // CASO NINGUN EXTRA
+
+            if(!cb_navegador_seat.isChecked() && !cb_control_crucero_seat.isChecked() && !cb_sensores_seat.isChecked()){
+                return 0;
+            }// SI TIENE EXTRA NAVEGADOR
+
+            else if(cb_navegador_seat.isChecked() && !cb_control_crucero_seat.isChecked() && !cb_sensores_seat.isChecked()){
+                return 15;
+            } // SI TIENE EXTRA CONTROL DE CRUCERO
+
+            else if(!cb_navegador_seat.isChecked() && cb_control_crucero_seat.isChecked() && !cb_sensores_seat.isChecked()){
+                return 10;
+            } // SI TIENE EXTRA SENSORES APARCAMIENTO
+
+            else if(!cb_navegador_seat.isChecked() && !cb_control_crucero_seat.isChecked() && cb_sensores_seat.isChecked()){
+                return 5;
+            } // SI TIENE EXTRA NAVEGADOR + CONTROL CRUCERO
+
+            else if(cb_navegador_seat.isChecked() && cb_control_crucero_seat.isChecked() && !cb_sensores_seat.isChecked()){
+                return 25;
+            } // SI TIENE EXTRA NAVEGADOR + SENSORES
+
+            else if(cb_navegador_seat.isChecked() && !cb_control_crucero_seat.isChecked() && cb_sensores_seat.isChecked()){
+                return 20;
+            } // SI TIENE EXTRA CONTROL CRUCERO + SENSORES
+
+            else if(!cb_navegador_seat.isChecked() && cb_control_crucero_seat.isChecked() && cb_sensores_seat.isChecked()){
+                return 15;
+            } // SI TIENE FULL EXTRAS
+            else if(cb_navegador_seat.isChecked() && cb_control_crucero_seat.isChecked() && cb_sensores_seat.isChecked()){
+                return 30;
+            }
+            // CASO MARCA DACIA
+        } else if(marca.equals(DACIA)) {
+            // SI NO CONTIENE EXTRAS
+            if (!cb_navegador_dacia.isChecked() && !cb_bluetooth_dacia.isChecked() && !cb_aire_dacia.isChecked()) {
+                return 0;
+            } // SI TIENE EXTRA NAVEGADOR
+
+            else if (cb_navegador_dacia.isChecked() && !cb_bluetooth_dacia.isChecked() && !cb_aire_dacia.isChecked()) {
+                return 10;
+            } // SI TIENE EXTRA BLUETOOTH
+
+            else if (!cb_navegador_dacia.isChecked() && cb_bluetooth_dacia.isChecked() && !cb_aire_dacia.isChecked()) {
+                return 5;
+            } // SI TIENE EXTRA AIRE ACONDICIONADO
+
+            else if(!cb_navegador_dacia.isChecked() && !cb_bluetooth_dacia.isChecked() && cb_aire_dacia.isChecked()){
+                return 15;
+            } // SI TIENE EXTRA NAVEGADOR + BLUETOOTH
+
+            else if(cb_navegador_dacia.isChecked() && cb_bluetooth_dacia.isChecked() && !cb_aire_dacia.isChecked()){
+                return 15;
+            } // SI TIENE EXTRA NAVEGADOR + AIRE ACONDICIONADO
+
+            else if(cb_navegador_dacia.isChecked() && !cb_bluetooth_dacia.isChecked() && cb_aire_dacia.isChecked()){
+                return 25;
+            } // SI TIENE EXTRA BLUETOOTH + AIRE ACONDICIONADO
+
+            else if(!cb_navegador_dacia.isChecked() && cb_bluetooth_dacia.isChecked() && cb_aire_dacia.isChecked()){
+                return 20;
+            } // SI TIENE FULL EXTRAS
+            else if(cb_navegador_dacia.isChecked() && cb_bluetooth_dacia.isChecked() && cb_aire_dacia.isChecked()){
+                return 30;
+            }
+        }
+        return 0;
     }
 
 }
