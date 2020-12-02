@@ -1,11 +1,10 @@
-com/example/rentcar/ACT_4_HISTORIAL.java
- com.example.rentcar.ACT_4_HISTORIAL
- com.example.rentcar.ACT_4_HISTORIAL$1
- com.example.rentcar.ACT_4_HISTORIAL$2
- com.example.rentcar.ACT_4_HISTORIAL$3
- com.example.rentcar.ACT_4_HISTORIAL$4
- com.example.rentcar.ACT_4_HISTORIAL$5
- com.example.rentcar.ACT_4_HISTORIAL$6
+com/example/rentcar/ACT_5_EDITAR_PERFIL_USUARIO.java
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO$1
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO$1$1
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO$1$2
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO$2
+ com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO$3
 com/example/rentcar/ACT_1_PANTALLA_INICIO.java
  com.example.rentcar.ACT_1_PANTALLA_INICIO
  com.example.rentcar.ACT_1_PANTALLA_INICIO$1
@@ -25,6 +24,9 @@ com/example/rentcar/ACT_2_LOGIN.java
  com.example.rentcar.ACT_2_LOGIN$1
  com.example.rentcar.ACT_2_LOGIN$1$1
  com.example.rentcar.ACT_2_LOGIN$1$2
+com/example/rentcar/ACT_4_HISTORIAL_BUSQUEDA.java
+ com.example.rentcar.ACT_4_HISTORIAL_BUSQUEDA
+ com.example.rentcar.ACT_4_HISTORIAL_BUSQUEDA$1
 com/example/rentcar/ACT_4_FORMULARIO_RESERVA.java
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA
  com.example.rentcar.ACT_4_FORMULARIO_RESERVA$1
@@ -40,3 +42,15 @@ com/example/rentcar/ACT_3_PANTALLA_PRINCIPAL.java
  com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL
  com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$1
  com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$2
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$3
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$4
+com/example/rentcar/ACT_4_HISTORIAL_FACTURA.java
+ com.example.rentcar.ACT_4_HISTORIAL_FACTURA
+ com.example.rentcar.ACT_4_HISTORIAL_FACTURA$1
+ com.example.rentcar.ACT_4_HISTORIAL_FACTURA$2
+ com.example.rentcar.ACT_4_HISTORIAL_FACTURA$3
+ com.example.rentcar.ACT_4_HISTORIAL_FACTURA$4
+com/example/rentcar/ACT_5_BORRAR_RESERVA.java
+ com.example.rentcar.ACT_5_BORRAR_RESERVA
+ com.example.rentcar.ACT_5_BORRAR_RESERVA$1
+ com.example.rentcar.ACT_5_BORRAR_RESERVA$2

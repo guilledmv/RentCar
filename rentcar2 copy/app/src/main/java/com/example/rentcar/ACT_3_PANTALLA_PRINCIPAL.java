@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
 
     // Variables visibles en pantalla
-    private Button btn_historial,btn_realizar_reserva,btn_modificar_reserva,btn_borrar_reserva;
+    private Button btn_historial,btn_realizar_reserva,btn_modificar_reserva,btn_borrar_reserva,btn_editar_perfil;
     private ProgressBar progressBar;
     /*
     BOTONES DE MODIFICAR Y ELIMINAR RESERVA--> 2ºCICLO, NO HACER
@@ -28,8 +28,19 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
         btn_realizar_reserva = findViewById(R.id.btn_realizar_reserva_ACT_3);
         btn_modificar_reserva = findViewById(R.id.btn_modifica_reserva_ACT_3);
         btn_borrar_reserva = findViewById(R.id.btn_borrar_reserva_ACT_3);
+        btn_editar_perfil = findViewById(R.id.btn_editar_perfil_ACT_3);
         progressBar = findViewById(R.id.pb_ACT_3_PANTALLA_PRINCIPAL);
         email = getIntent().getStringExtra("email");
+
+        // Click en editar perfil de usuario--> Abre formulario registro modificable
+        btn_editar_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this, ACT_5_EDITAR_PERFIL_USUARIO.class);
+                intent.putExtra("email",email);
+                startActivity(intent);
+            }
+        });
         // Click en realizar reserva--> Abre formulario
         btn_realizar_reserva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,13 +53,24 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // Click en historial reserva--> Abre una lista con los numeros de reserva asociados a un cliente
         btn_historial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this,ACT_4_HISTORIAL.class);
+                Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this, ACT_4_HISTORIAL_BUSQUEDA.class);
                 intent.putExtra("email",email);
                 startActivity(intent);
             }
         });
+        // Click en borrar reserva--> Abre una lista con los numeros de reserva asociados a un cliente
+        btn_borrar_reserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this, ACT_5_BORRAR_RESERVA.class);
+                intent.putExtra("email",email);
+                startActivity(intent);
+            }
+        });
+
     }
 }

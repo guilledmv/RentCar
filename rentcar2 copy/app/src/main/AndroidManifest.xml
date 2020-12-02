@@ -11,13 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rentcar">
-        <activity android:name=".ACT_4_HISTORIAL"
-            android:label="HISTORIAL DE RESERVAS">
-        </activity>
+        <activity android:name=".ACT_5_EDITAR_PERFIL_USUARIO"
+            android:label="EDITAR PERFIL USUARIO"></activity>
+        <activity
+            android:name=".ACT_5_BORRAR_RESERVA"
+            android:label="BORRAR RESERVA"
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL" />
+        <activity
+            android:name=".ACT_4_HISTORIAL_BUSQUEDA"
+            android:label="BÚSQUEDA DE FACTURA" />
+        <activity
+            android:name=".ACT_4_HISTORIAL_FACTURA"
+            android:label="FACTURA SELECCIONADA" />
         <activity
             android:name=".ACT_4_FORMULARIO_RESERVA"
             android:label="FORMULARIO RESERVA"
-            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL"></activity>
+            android:parentActivityName=".ACT_3_PANTALLA_PRINCIPAL" />
         <activity
             android:name=".ACT_3_PANTALLA_PRINCIPAL"
             android:label="MENU PRINCIPAL" />

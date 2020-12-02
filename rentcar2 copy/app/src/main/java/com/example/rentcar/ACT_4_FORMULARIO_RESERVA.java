@@ -80,8 +80,6 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
     // Variable email
     private String email;
 
-    private List <Integer> numerosReserva = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,6 +227,11 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
 
                     // Obtenemos marca elegida
                     String marca = spinner_marca_vehiculo.getSelectedItem().toString();
+
+                    // Obtenemos los datos del usuario
+                    obtenDatosUsuario(cloudReference, tv_dni, tv_nombre, tv_tipo);
+
+                    // Obtenemos los datos de las marcas y calculamos su tarifa
                     if (marca.equals(PORSCHE)) {
                         obtenDatosMarca(cloudReference, VEHICULOS, PORSCHE, tv_modelo, tv_disponibilidad, tv_tarifa, tv_matricula, numero_dias, numero_meses, numero_años);
                     }
@@ -238,8 +241,6 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     if (marca.equals(DACIA)) {
                         obtenDatosMarca(cloudReference, VEHICULOS, DACIA, tv_modelo, tv_disponibilidad, tv_tarifa, tv_matricula, numero_dias, numero_meses, numero_años);
                     }
-                    obtenDatosUsuario(cloudReference, tv_dni, tv_nombre, tv_tipo);
-
                     pb_calcular_presupuesto.setVisibility(View.INVISIBLE);
                 }
             }
@@ -329,10 +330,18 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     String marca = spinner_marca_vehiculo.getSelectedItem().toString();
                     Map<String, Object> datosUsuario = new HashMap<String, Object>();
                     Map<String, Object> datosReserva = new HashMap<String, Object>();
+                    // Obtenemos marca elegida
+                    String marca2 = spinner_marca_vehiculo.getSelectedItem().toString();
+                    // Obtenemos franquicias
+                    String franquiciaOrigen = spinner_franquicia_origen.getSelectedItem().toString();
+                    String franquiciaDestino = spinner_franquicia_destino.getSelectedItem().toString();
                     datosReserva.put("numero reserva", numero_reserva);
                     datosUsuario.put("numero reserva" + Integer.toString(1), numero_reserva);
                     datosReserva.put("inicio reserva", inicio_reserva);
                     datosReserva.put("fin reserva", fin_reserva);
+                    datosReserva.put("marca",marca2);
+                    datosReserva.put("franquicia origen",franquiciaOrigen);
+                    datosReserva.put("franquicia destino",franquiciaDestino);
                     datosReserva.put("email", email);
                     datosReserva.put("dni", tv_dni.getText().toString());
                     datosReserva.put("nombre", tv_nombre.getText().toString());
@@ -462,12 +471,44 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                     if (numero_años == 0 && numero_meses == 0) {
                         // MINIMO CONTAMOS UN DIA PARA EL ALQUILER
                         if (numero_dias == 0) {
-                            int tarifaTotal1 = Integer.parseInt(tarifa) + extra;
-                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
-                            tv_tarifa.setText(tarifaTotal2 + "€");
+                            if(tv_tipo.getText().toString().equals("Particular")) {
+                                int tarifaTotal1 = Integer.parseInt(tarifa) + extra;
+                                String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            } else if(tv_tipo.getText().toString().equals("Empresa")){
+                                // CALCULAMOS TARIFA BASE
+                                int tarifaBase = Integer.parseInt(tarifa) + extra;
+                                double tarifaTotal1 = tarifaBase - (0.21 * tarifaBase);
+                                String tarifaTotal2 = Double.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            }
                             // TENEMOS VARIOS DIAS
                         } else {
-                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias + extra;
+                            if(tv_tipo.getText().toString().equals("Particular")) {
+                                int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias + extra;
+                                if (tarifaTotal1 > 0) {
+                                    String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                                    tv_tarifa.setText(tarifaTotal2 + "€");
+                                } else {
+                                    tv_tarifa.setText("Error en tarifa");
+                                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                                }
+                            } else if(tv_tipo.getText().toString().equals("Empresa")){
+                                int tarifaBase = Integer.parseInt(tarifa) * numero_dias + extra ;
+                                double tarifaTotal1 = tarifaBase - (0.21 * tarifaBase);
+                                if (tarifaTotal1 > 0) {
+                                    String tarifaTotal2 = Double.toString(tarifaTotal1);
+                                    tv_tarifa.setText(tarifaTotal2 + "€");
+                                } else {
+                                    tv_tarifa.setText("Error en tarifa");
+                                    Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                    if (numero_años == 0 && numero_meses != 0) {
+                        if(tv_tipo.getText().toString().equals("Particular")) {
+                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30 + extra;
                             if (tarifaTotal1 > 0) {
                                 String tarifaTotal2 = Integer.toString(tarifaTotal1);
                                 tv_tarifa.setText(tarifaTotal2 + "€");
@@ -475,26 +516,38 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
                                 tv_tarifa.setText("Error en tarifa");
                                 Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    }
-                    if (numero_años == 0 && numero_meses != 0) {
-                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30 + extra;
-                        if (tarifaTotal1 > 0) {
-                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
-                            tv_tarifa.setText(tarifaTotal2 + "€");
-                        } else {
-                            tv_tarifa.setText("Error en tarifa");
-                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                        } else if(tv_tipo.getText().toString().equals("Empresa")){
+                            int tarifaBase = Integer.parseInt(tarifa) * numero_dias * numero_meses * 30 + extra;
+                            double tarifaTotal1 = tarifaBase - (0.21 * tarifaBase);
+                            if (tarifaTotal1 > 0) {
+                                String tarifaTotal2 = Double.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            } else {
+                                tv_tarifa.setText("Error en tarifa");
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                     if (numero_años != 0) {
-                        int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365 + extra;
-                        if (tarifaTotal1 > 0) {
-                            String tarifaTotal2 = Integer.toString(tarifaTotal1);
-                            tv_tarifa.setText(tarifaTotal2 + "€");
-                        } else {
-                            tv_tarifa.setText("Error en tarifa");
-                            Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                        if(tv_tipo.getText().toString().equals("Particular")) {
+                            int tarifaTotal1 = Integer.parseInt(tarifa) * numero_dias * numero_años * 365 + extra;
+                            if (tarifaTotal1 > 0) {
+                                String tarifaTotal2 = Integer.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            } else {
+                                tv_tarifa.setText("Error en tarifa");
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                            }
+                        } else if(tv_tipo.getText().toString().equals("Empresa")){
+                            int tarifaBase = Integer.parseInt(tarifa) * numero_dias * numero_años * 365 + extra;
+                            double tarifaTotal1 = tarifaBase - (0.21 * tarifaBase);
+                            if (tarifaTotal1 > 0) {
+                                String tarifaTotal2 = Double.toString(tarifaTotal1);
+                                tv_tarifa.setText(tarifaTotal2 + "€");
+                            } else {
+                                tv_tarifa.setText("Error en tarifa");
+                                Toast.makeText(ACT_4_FORMULARIO_RESERVA.this, "Error, fallo al calcular presupuesto", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                     tv_matricula.setText(matricula);
@@ -817,5 +870,4 @@ public class ACT_4_FORMULARIO_RESERVA extends AppCompatActivity {
         }
         return 0;
     }
-
 }

@@ -15,7 +15,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Nexus_5X_API_30]" />
   <component name="ExportToHTMLSettings">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
@@ -49,6 +49,9 @@
     <key name="android.template.-980021927">
       <recent name="com.example.rentcar" />
     </key>
+    <key name="android.template.1974824032">
+      <recent name="com.example.rentcar" />
+    </key>
     <key name="android.template.898431086">
       <recent name="com.example.rentcar" />
     </key>
@@ -59,7 +62,13 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="android.template.-249381685">
+      <recent name="com.example.rentcar" />
+    </key>
     <key name="android.template.635143899">
+      <recent name="com.example.rentcar" />
+    </key>
+    <key name="android.template.-524155796">
       <recent name="com.example.rentcar" />
     </key>
     <key name="android.template.-356146398">
@@ -146,55 +155,63 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="458" y="213" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606911994828">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="458" y="213" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.875@0.25.1440.875" timestamp="1606911994828" />
     <state x="100" y="124" width="1240" height="676" key="AVDManager" timestamp="1605720884162">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1605349034779" />
     <state x="100" y="124" width="1240" height="676" key="AVDManager/0.25.1440.875@0.25.1440.875" timestamp="1605720884162" />
-    <state x="542" y="264" key="AndroidCreateXmlResourceDialog" timestamp="1606473473986">
+    <state x="542" y="264" key="AndroidCreateXmlResourceDialog" timestamp="1606913142575">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="542" y="263" key="AndroidCreateXmlResourceDialog/0.23.1440.877@0.23.1440.877" timestamp="1605460722920" />
-    <state x="542" y="264" key="AndroidCreateXmlResourceDialog/0.25.1440.875@0.25.1440.875" timestamp="1606473473986" />
-    <state width="1396" height="2" key="GridCell.Tab.0.bottom" timestamp="1606413327587">
+    <state x="542" y="264" key="AndroidCreateXmlResourceDialog/0.25.1440.875@0.25.1440.875" timestamp="1606913142575" />
+    <state width="1396" height="83" key="GridCell.Tab.0.bottom" timestamp="1606910352605">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605465352231" />
-    <state width="1396" height="2" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
-    <state width="1396" height="2" key="GridCell.Tab.0.center" timestamp="1606413327586">
+    <state width="1396" height="83" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606910352605" />
+    <state width="1396" height="83" key="GridCell.Tab.0.center" timestamp="1606910352605">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1605465352229" />
-    <state width="1396" height="2" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1606413327586" />
-    <state width="1396" height="2" key="GridCell.Tab.0.left" timestamp="1606413327586">
+    <state width="1396" height="83" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1606910352605" />
+    <state width="1396" height="83" key="GridCell.Tab.0.left" timestamp="1606910352604">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1605465352228" />
-    <state width="1396" height="2" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1606413327586" />
-    <state width="1396" height="2" key="GridCell.Tab.0.right" timestamp="1606413327587">
+    <state width="1396" height="83" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1606910352604" />
+    <state width="1396" height="83" key="GridCell.Tab.0.right" timestamp="1606910352605">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1605465352230" />
-    <state width="1396" height="2" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
-    <state width="1396" height="2" key="GridCell.Tab.1.bottom" timestamp="1606413327588">
+    <state width="1396" height="83" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1606910352605" />
+    <state width="1396" height="83" key="GridCell.Tab.1.bottom" timestamp="1606910352606">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605465352234" />
-    <state width="1396" height="2" key="GridCell.Tab.1.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
-    <state width="1396" height="2" key="GridCell.Tab.1.center" timestamp="1606413327588">
+    <state width="1396" height="83" key="GridCell.Tab.1.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606910352606" />
+    <state width="1396" height="83" key="GridCell.Tab.1.center" timestamp="1606910352606">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1605465352232" />
-    <state width="1396" height="2" key="GridCell.Tab.1.center/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
-    <state width="1396" height="2" key="GridCell.Tab.1.left" timestamp="1606413327587">
+    <state width="1396" height="83" key="GridCell.Tab.1.center/0.25.1440.875@0.25.1440.875" timestamp="1606910352606" />
+    <state width="1396" height="83" key="GridCell.Tab.1.left" timestamp="1606910352606">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1605465352231" />
-    <state width="1396" height="2" key="GridCell.Tab.1.left/0.25.1440.875@0.25.1440.875" timestamp="1606413327587" />
-    <state width="1396" height="2" key="GridCell.Tab.1.right" timestamp="1606413327588">
+    <state width="1396" height="83" key="GridCell.Tab.1.left/0.25.1440.875@0.25.1440.875" timestamp="1606910352606" />
+    <state width="1396" height="83" key="GridCell.Tab.1.right" timestamp="1606910352606">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1396" height="463" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1605465352233" />
-    <state width="1396" height="2" key="GridCell.Tab.1.right/0.25.1440.875@0.25.1440.875" timestamp="1606413327588" />
+    <state width="1396" height="83" key="GridCell.Tab.1.right/0.25.1440.875@0.25.1440.875" timestamp="1606910352606" />
+    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup" timestamp="1606908432477">
+      <screen x="0" y="25" width="1440" height="875" />
+    </state>
+    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup/0.25.1440.875@0.25.1440.875" timestamp="1606908432477" />
   </component>
 </project>
