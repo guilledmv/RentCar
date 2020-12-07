@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rentcar">
-        <activity android:name=".ACT_5_EDITAR_PERFIL_USUARIO"
-            android:label="EDITAR PERFIL USUARIO"></activity>
+        <activity android:name=".ACT_5_MODIFICAR_FORMULARIO"></activity>
+        <activity android:name=".ACT_4_MODIFICAR_RESERVA" />
+        <activity
+            android:name=".ACT_5_EDITAR_PERFIL_USUARIO"
+            android:label="EDITAR PERFIL USUARIO" />
         <activity
             android:name=".ACT_5_BORRAR_RESERVA"
             android:label="BORRAR RESERVA"

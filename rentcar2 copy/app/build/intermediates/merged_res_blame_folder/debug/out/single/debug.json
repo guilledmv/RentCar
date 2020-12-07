@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
-        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
-    },
-    {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
     },
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -18,6 +18,10 @@
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/layout_act_5_modificar_formulario.xml.flat",
+        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/layout/act_5_modificar_formulario.xml"
     },
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/layout_act_1_pantalla_inicio.xml.flat",
@@ -130,6 +134,10 @@
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/menu_activity_main_drawer.xml.flat",
         "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/menu/activity_main_drawer.xml"
+    },
+    {
+        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/layout_act_4_modificar_reserva.xml.flat",
+        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/layout/act_4_modificar_reserva.xml"
     },
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_ic_menu_slideshow.xml.flat",

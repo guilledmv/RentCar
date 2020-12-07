@@ -20,6 +20,7 @@ public class ACT_4_HISTORIAL_FACTURA extends AppCompatActivity {
 
     // Variables para obtener los datos
     private String email;
+    private String numeroReserva;
     // Variables de la pantalla
     private TextView tv_title_numero_reserva1,tv_num_reserva1,tv_title_nombre_reserva1,tv_nombre_reserva1
             , tv_datos_reserva1, tv_tittle_email_reserva1, tv_email_reserva1, tv_tittle_inicio_reserva1
@@ -41,7 +42,7 @@ public class ACT_4_HISTORIAL_FACTURA extends AppCompatActivity {
     private final String IMPORTE = "importe";
 
     // Lista con los datos que tiene que leer
-    private List<String> datosReserva = Arrays.asList(NOMBRE,EMAIL,INICIO,FIN,MATRICULA,TIPO,IMPORTE);
+    private List <String> datosReserva = Arrays.asList(NOMBRE,EMAIL,INICIO,FIN,MATRICULA,TIPO,IMPORTE);
 
 
     @Override
@@ -49,6 +50,7 @@ public class ACT_4_HISTORIAL_FACTURA extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_4_historial_factura);
         email = getIntent().getStringExtra("email");
+        numeroReserva = getIntent().getStringExtra("numero");
         mAuth = FirebaseAuth.getInstance();
         cloudReference = FirebaseFirestore.getInstance();
         tv_title_numero_reserva1 = findViewById(R.id.tv_title_numero_reserva1);
@@ -69,31 +71,12 @@ public class ACT_4_HISTORIAL_FACTURA extends AppCompatActivity {
         tv_linea_separadora1 = findViewById(R.id.tv_linea_separadora1);
         tv_tittle_matricula_reserva1 = findViewById(R.id.tv_tittle_matricula_reserva1);
         tv_matricula_reserva1 = findViewById(R.id.tv_matricula_reserva1);
-        compruebaExistenReservas(cloudReference);
-    }
-    // Metodo auxiliar que comprueba si tenemos 1 reserva
-    private void compruebaExistenReservas(FirebaseFirestore cloudReference){
-        cloudReference.collection("Usuarios").document(email).collection("Datos personales").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.contains("numero reserva1")) {
-                    tv_num_reserva1.setText(documentSnapshot.get("numero reserva1").toString());
-                    leeDatosReserva1(cloudReference);
-                } else {
-                    tv_num_reserva1.setText("No disponible");
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ACT_4_HISTORIAL_FACTURA.this,"Error al leer los datos de las reservas",Toast.LENGTH_SHORT).show();
-            }
-        });
+        leeDatosReserva1(cloudReference,numeroReserva,email);
     }
 
     // Metodo auxiliar que devuelve todos los datos de la reserva1
-    private void leeDatosReserva1(FirebaseFirestore cloudReference){
-        cloudReference.collection("Usuarios").document(email).collection("Reservas").document(tv_num_reserva1.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void leeDatosReserva1(FirebaseFirestore cloudReference, String numeroReserva, String email){
+        cloudReference.collection("Usuarios").document(email).collection("Reservas").document(numeroReserva).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 escribeDatosReserva1(documentSnapshot,datosReserva);
@@ -144,5 +127,6 @@ public class ACT_4_HISTORIAL_FACTURA extends AppCompatActivity {
                 i++;
             }
         }
+        tv_num_reserva1.setText(numeroReserva);
     }
 }

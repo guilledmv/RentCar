@@ -53,6 +53,17 @@ public class ACT_3_PANTALLA_PRINCIPAL extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // Click en modificar reserva--> busca numero y abre formulario
+        btn_modificar_reserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Nos vamos a la actividad ACT_4_FORMULARIO_RESERVA
+                Intent intent = new Intent(ACT_3_PANTALLA_PRINCIPAL.this,ACT_4_MODIFICAR_RESERVA.class);
+                intent.putExtra("email",email);
+                progressBar.setVisibility(View.GONE);
+                startActivity(intent);
+            }
+        });
         // Click en historial reserva--> Abre una lista con los numeros de reserva asociados a un cliente
         btn_historial.setOnClickListener(new View.OnClickListener() {
             @Override

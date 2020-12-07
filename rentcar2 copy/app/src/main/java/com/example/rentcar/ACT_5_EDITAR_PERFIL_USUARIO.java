@@ -52,7 +52,7 @@ public class ACT_5_EDITAR_PERFIL_USUARIO extends AppCompatActivity {
 
     // VARIABLES MANEJO DE DATOS
     private String email;
-    private List<String> datosUsuario;
+    private List <String> datosUsuario;
 
 
     @Override
