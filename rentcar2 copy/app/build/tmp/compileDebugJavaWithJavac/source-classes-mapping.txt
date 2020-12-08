@@ -47,6 +47,13 @@ com/example/rentcar/ACT_2_LOGIN.java
  com.example.rentcar.ACT_2_LOGIN$1
  com.example.rentcar.ACT_2_LOGIN$1$1
  com.example.rentcar.ACT_2_LOGIN$1$2
+com/example/rentcar/ACT_3_PANTALLA_PRINCIPAL.java
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$1
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$2
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$3
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$4
+ com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$5
 com/example/rentcar/ACT_4_MODIFICAR_RESERVA.java
  com.example.rentcar.ACT_4_MODIFICAR_RESERVA
  com.example.rentcar.ACT_4_MODIFICAR_RESERVA$1
@@ -64,10 +71,3 @@ com/example/rentcar/ACT_5_MODIFICAR_FORMULARIO.java
  com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO$7
  com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO$8
  com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO$9
-com/example/rentcar/ACT_3_PANTALLA_PRINCIPAL.java
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$1
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$2
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$3
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$4
- com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL$5

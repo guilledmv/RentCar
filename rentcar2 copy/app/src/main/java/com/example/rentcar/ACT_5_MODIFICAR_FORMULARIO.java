@@ -35,7 +35,6 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
 
     // Variables locales del layout
     private String email, id_reserva, date_f, date_i, hora_f, hora_i;
-    private HashMap <String, String> bdd_mapping = new HashMap<String, String>();
     private EditText edt_h_i,edt_f_i,edt_h_f,edt_f_f;
     private Spinner sp_marca, sp_f_o, sp_f_d;
     private TextView tv_inicio_alquiler, tv_fin_alquiler, tv_modelo, tv_seleccion, tv_franquicia_origen,
@@ -625,11 +624,11 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
 
     private void fix_date(String date, boolean order){
         if(!order){
-            date_f = date.substring(0,9);
-            hora_f = date.substring(10,15);
+            date_f = date.substring(0,10);
+            hora_f = date.substring(10,16);
         }else{
-            date_i = date.substring(0,9);
-            hora_i = date.substring(10,15);
+            date_i = date.substring(0,10);
+            hora_i = date.substring(10,16);
         }
     }
     // METODO AUXILIAR QUE CALCULA EL EXTRA A SUMA EN EL COSTE DE LA TARIFA

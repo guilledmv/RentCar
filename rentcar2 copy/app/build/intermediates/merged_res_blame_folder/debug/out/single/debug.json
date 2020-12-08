@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/mipmap-hdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
         "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
