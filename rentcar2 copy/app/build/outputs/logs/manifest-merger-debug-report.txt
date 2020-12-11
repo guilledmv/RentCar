@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/75481e4f325e3678b01ca7833508255c/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-ui:2.2.2] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/f13f36edfedf131d1bf4d75a19915bb3/navigation-ui-2.2.2/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.2.1] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/a662a09f936ef9769e962d90fad0478e/material-1.2.1/AndroidManifest.xml:17:1-24:12
@@ -55,20 +55,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/guillermodemiguelv
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/57b5ae7b4c1e8222c5e1793edd39aefa/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/3c410805b211f565ddf8d6b49f7dd616/jetified-protolite-well-known-types-17.1.0/AndroidManifest.xml:2:1-11:12
 MERGED from [io.grpc:grpc-android:1.28.0] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/47a9b793fb482438f4facbefe890c2a3/jetified-grpc-android-1.28.0/AndroidManifest.xml:2:1-13:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
+INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
 	package
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:3:5-34
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-58:12
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:1-60:12
 		INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:2:11-69
@@ -81,7 +81,7 @@ MERGED from [com.google.firebase:firebase-firestore:22.0.0] /Users/guillermodemi
 	android:name
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:7:5-56:19
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:7:5-58:19
 MERGED from [com.google.android.material:material:1.2.1] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/a662a09f936ef9769e962d90fad0478e/material-1.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.2.1] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/a662a09f936ef9769e962d90fad0478e/material-1.2.1/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/guillermodemiguelvillanueva/.gradle/caches/transforms-2/files-2.1/e9a7396e1444c212720c909ece4c39d7/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
@@ -121,91 +121,95 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/guil
 	android:theme
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:13:9-45
 activity#com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-73
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:9-15:66
+	android:label
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:15:13-54
 	android:name
 		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:14:19-61
 activity#com.example.rentcar.ACT_4_MODIFICAR_RESERVA
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:15:9-61
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:16:9-17:45
+	android:label
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:17:13-43
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:15:19-58
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:16:19-58
 activity#com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:16:9-18:53
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:18:9-20:53
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:18:13-50
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:20:13-50
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:17:13-56
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:19:13-56
 activity#com.example.rentcar.ACT_5_BORRAR_RESERVA
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:19:9-22:70
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:21:9-24:70
 	android:parentActivityName
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:22:13-67
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:24:13-67
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:21:13-43
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:23:13-43
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:20:13-49
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:22:13-49
 activity#com.example.rentcar.ACT_4_HISTORIAL_BUSQUEDA
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:23:9-25:51
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:25:9-27:51
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:25:13-48
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:27:13-48
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:24:13-53
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:26:13-53
 activity#com.example.rentcar.ACT_4_HISTORIAL_FACTURA
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:26:9-28:52
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:28:9-30:52
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:28:13-49
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:30:13-49
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:27:13-52
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:29:13-52
 activity#com.example.rentcar.ACT_4_FORMULARIO_RESERVA
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:29:9-32:70
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:31:9-34:70
 	android:parentActivityName
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:32:13-67
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:34:13-67
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:31:13-47
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:33:13-47
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:30:13-53
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:32:13-53
 activity#com.example.rentcar.ACT_3_PANTALLA_PRINCIPAL
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:33:9-35:46
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:35:9-37:46
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:35:13-43
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:37:13-43
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:34:13-53
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:36:13-53
 activity#com.example.rentcar.ACT_1_PANTALLA_INICIO
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:36:9-44:20
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:38:9-46:20
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:38:13-36
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:40:13-36
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:37:13-50
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:39:13-50
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:39:13-43:29
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:41:13-45:29
 action#android.intent.action.MAIN
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:40:17-69
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:42:17-69
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:40:25-66
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:42:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:42:17-77
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:44:17-77
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:42:27-74
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:44:27-74
 activity#com.example.rentcar.ACT_2_LOGIN
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:45:9-48:65
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:47:9-50:65
 	android:parentActivityName
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:48:13-62
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:50:13-62
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:47:13-34
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:49:13-34
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:46:13-40
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:48:13-40
 activity#com.example.rentcar.ACT_2_CREATE_USER
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:49:9-52:65
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:51:9-54:65
 	android:parentActivityName
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:52:13-62
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:54:13-62
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:51:13-42
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:53:13-42
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:50:13-46
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:52:13-46
 activity#com.example.rentcar.ACT_2_LOGIN_OPTIONS
-ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:53:9-55:46
+ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:55:9-57:46
 	android:label
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:55:13-43
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:57:13-43
 	android:name
-		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:54:13-48
+		ADDED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml:56:13-48
 uses-sdk
 INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/guillermodemiguelvillanueva/Desktop/rentcar2/app/src/main/AndroidManifest.xml

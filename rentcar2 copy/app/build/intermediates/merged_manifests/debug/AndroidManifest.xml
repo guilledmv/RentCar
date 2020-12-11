@@ -22,8 +22,12 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.Rentcar" >
-        <activity android:name="com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO" />
-        <activity android:name="com.example.rentcar.ACT_4_MODIFICAR_RESERVA" />
+        <activity
+            android:name="com.example.rentcar.ACT_5_MODIFICAR_FORMULARIO"
+            android:label="@string/modificar_reserva" />
+        <activity
+            android:name="com.example.rentcar.ACT_4_MODIFICAR_RESERVA"
+            android:label="BUSCAR RESERVA" />
         <activity
             android:name="com.example.rentcar.ACT_5_EDITAR_PERFIL_USUARIO"
             android:label="EDITAR PERFIL USUARIO" />

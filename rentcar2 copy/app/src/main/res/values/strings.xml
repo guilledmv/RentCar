@@ -82,4 +82,5 @@
     <string name="edad3">Edad</string>
     <string name="domicilio3">Domicilio</string>
     <string name="dni3">DNI</string>
+    <string name="recalcular_presupuesto">Recalcular presupuesto</string>
 </resources>

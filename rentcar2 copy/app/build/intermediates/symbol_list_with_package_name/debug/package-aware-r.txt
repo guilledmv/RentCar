@@ -2152,6 +2152,7 @@ id tv_nombre_ACT_5_EDITAR_PERFIL
 id tv_nombre_ACT_5_FORMULARIO
 id tv_nombre_reserva1
 id tv_num_reserva1
+id tv_numero_reserva_ACT_5_MODIFICAR_FORMULARIO
 id tv_seleccion_ACT_4_FORMULARIO
 id tv_seleccion_ACT_5_FORMULARIO
 id tv_tarifa_ACT4_formulario
@@ -2501,6 +2502,7 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string project_id
 string realizar_reserva
+string recalcular_presupuesto
 string search_menu_title
 string selecci_n_de_veh_culo
 string sensores_aparcamiento_5

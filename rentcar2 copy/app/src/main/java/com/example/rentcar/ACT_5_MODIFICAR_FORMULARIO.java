@@ -38,7 +38,7 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
     private EditText edt_h_i,edt_f_i,edt_h_f,edt_f_f;
     private Spinner sp_marca, sp_f_o, sp_f_d;
     private TextView tv_inicio_alquiler, tv_fin_alquiler, tv_modelo, tv_seleccion, tv_franquicia_origen,
-            tv_franquicia_destino, tv_disponibilidad, tv_tarifa, tv_matricula, tv_nombre, tv_dni, tv_tipo;
+            tv_franquicia_destino, tv_disponibilidad, tv_tarifa, tv_matricula, tv_nombre, tv_dni, tv_tipo,tv_numero_reserva;
     private Button btn_modificar_reserva, btn_crear_presupuesto;
     private ProgressBar pb_calcular_presupuesto, pb_modificar_reserva;
 
@@ -101,6 +101,7 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
         tv_dni = findViewById(R.id.tv_dni_ACT_5_FORMULARIO);
         tv_nombre = findViewById(R.id.tv_nombre_ACT_5_FORMULARIO);
         tv_tipo = findViewById(R.id.tv_tipo_ACT_5_FORMULARIO);
+        tv_numero_reserva = findViewById(R.id.tv_numero_reserva_ACT_5_MODIFICAR_FORMULARIO);
 
         btn_modificar_reserva = findViewById(R.id.btn_modificar_reserva_ACT_5_MODIFICAR_RESERVA);
         btn_crear_presupuesto = findViewById(R.id.btn_calcular_presupuesto_ACT_5_FORMULARIO);
@@ -319,15 +320,13 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
                     }
                     // Creamos reserva en firebase
                     Random random = new Random();
-                    String numero_reserva = Integer.toString(random.nextInt(100000));
+                    String numero_reserva = tv_numero_reserva.getText().toString();
                     String inicio_reserva = edt_f_i.getText().toString() + " " + edt_h_i.getText().toString();
                     String fin_reserva = edt_f_f.getText().toString() + " " + edt_h_f.getText().toString();
                     String marca = sp_marca.getSelectedItem().toString();
                     Map<String,Object> datosUsuario = new HashMap<String, Object>();
                     Map<String, Object> datosReserva = new HashMap<String, Object>();
                     datosReserva.put("numero reserva", numero_reserva);
-                    datosUsuario.put("numero reserva"+ Integer.toString(n),numero_reserva);
-                    n++;
                     datosReserva.put("inicio reserva", inicio_reserva);
                     datosReserva.put("fin reserva", fin_reserva);
                     datosReserva.put("email", email);
@@ -337,13 +336,13 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
                     datosReserva.put("matricula", tv_matricula.getText().toString());
                     if (tv_tarifa.getText().toString().equals("no disponible")) {
                         pb_modificar_reserva.setVisibility(View.INVISIBLE);
-                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al crear reserva, debido a vehículo no disponible", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al modificar, debido a vehículo no disponible", Toast.LENGTH_SHORT).show();
                     } else if(tv_tarifa.getText().toString().equals("Error en tarifa")){
                         pb_modificar_reserva.setVisibility(View.INVISIBLE);
-                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al crear reserva, debido a la tarifa", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al modificar reserva, debido a la tarifa", Toast.LENGTH_SHORT).show();
                     } else if(tv_tarifa.getText().toString().equals("Tarifa")){
                         pb_modificar_reserva.setVisibility(View.INVISIBLE);
-                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al crear reserva, debes calcular un presupuesto antes de crear una reserva", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ACT_5_MODIFICAR_FORMULARIO.this, "Fallo al modificar reserva, debes recalcular un presupuesto antes de modificar una reserva", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         datosReserva.put("importe", tv_tarifa.getText().toString());
@@ -376,6 +375,7 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
             }
         });
     }
+
     // Metodo privado que obtiene el modelo del vehiculo
     private void obtenDatosMarca(FirebaseFirestore cloudReference, String Vehiculo, String marca, TextView tv_modelo, TextView tv_disponibilidad,
                                  TextView tv_tarifa,TextView tv_matricula,int numero_dias,int numero_meses, int numero_años){
@@ -606,11 +606,23 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
                     edt_f_f.setText(date_f);
                     edt_h_f.setText(hora_f);
                 }if(snapshot.contains("marca")){
-                    sp_marca.setPrompt(snapshot.get("marca").toString());
+                    sp_marca.setSelection(obtenerPosicionItem(sp_marca, snapshot.get("marca").toString()));
+                    if(snapshot.get("marca").toString().equals(PORSCHE)){
+                        cargarExtrasSeleccionadosPorsche(snapshot);
+                    }else if(snapshot.get("marca").toString().equals(DACIA)){
+                        cargarExtrasSeleccionadosDacia(snapshot);
+                    }else{
+                        cargarExtrasSeleccionadosSeat(snapshot);
+                    }
                 }if(snapshot.contains("franquicia origen")){
-                    sp_f_o.setPrompt(snapshot.get("franquicia origen").toString());
+                    sp_f_o.setSelection(obtenerPosicionItem(sp_f_o, snapshot.get("franquicia origen").toString()));
                 }if(snapshot.contains("franquicia destino")){
-                    sp_f_d.setPrompt(snapshot.get("franquicia destino").toString());
+                    sp_f_d.setSelection(obtenerPosicionItem(sp_f_d, snapshot.get("franquicia destino").toString()));
+                }if(snapshot.contains("importe")){
+                    tv_tarifa.setText((CharSequence) snapshot.get("importe"));
+                }
+                if(snapshot.contains("numero reserva")){
+                    tv_numero_reserva.setText(snapshot.getString("numero reserva"));
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -621,14 +633,30 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
             }
         });
     }
-
+    //METODO PARA OBTENER UNA POSICION DE UN SPINNER
+    public static int obtenerPosicionItem(Spinner spinner, String fruta) {
+        //Creamos la variable posicion y lo inicializamos en 0
+        int posicion = 0;
+        //Recorre el spinner en busca del ítem que coincida con el parametro `String fruta`
+        //que lo pasaremos posteriormente
+        for (int i = 0; i < spinner.getCount(); i++) {
+            //Almacena la posición del ítem que coincida con la búsqueda
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(fruta)) {
+                posicion = i;
+            }
+        }
+        //Devuelve un valor entero (si encontro una coincidencia devuelve la
+        // posición 0 o N, de lo contrario devuelve 0 = posición inicial)
+        return posicion;
+    }
+    //METODO AUXILIAR PARA ARREGLAR EL FORMATO DE LA FECHA Y HORA SACADOS DEL FORMULARIO DE RESERVA
     private void fix_date(String date, boolean order){
         if(!order){
             date_f = date.substring(0,10);
-            hora_f = date.substring(10,16);
+            hora_f = date.substring(11,16);
         }else{
             date_i = date.substring(0,10);
-            hora_i = date.substring(10,16);
+            hora_i = date.substring(11,16);
         }
     }
     // METODO AUXILIAR QUE CALCULA EL EXTRA A SUMA EN EL COSTE DE LA TARIFA
@@ -826,5 +854,31 @@ public class ACT_5_MODIFICAR_FORMULARIO extends AppCompatActivity {
         cb_navegador_dacia_5.setVisibility(View.INVISIBLE);
         cb_bluetooth_dacia_5.setVisibility(View.INVISIBLE);
         cb_aire_dacia_5.setVisibility(View.INVISIBLE);
+    }
+    public void cargarExtrasSeleccionadosPorsche(DocumentSnapshot snapshot){
+        cb_automatico_porsche_5.setVisibility(View.VISIBLE);
+        cb_calefactables_porsche_5.setVisibility(View.VISIBLE);
+        cb_techo_panoramico_porsche_5.setVisibility(View.VISIBLE);
+        cb_version_deportiva_porsche_5.setVisibility(View.VISIBLE);
+        cb_automatico_porsche_5.setChecked(snapshot.get(AUTOMATICO).equals("SI"));
+        cb_version_deportiva_porsche_5.setChecked(snapshot.get(VERSION).equals("SI"));
+        cb_techo_panoramico_porsche_5.setChecked(snapshot.get(TECHO).equals("SI"));
+        cb_calefactables_porsche_5.setChecked(snapshot.get(CALEFACTABLE).equals("SI"));
+    }
+    public void cargarExtrasSeleccionadosDacia(DocumentSnapshot snapshot){
+        cb_aire_dacia_5.setVisibility(View.VISIBLE);
+        cb_bluetooth_dacia_5.setVisibility(View.VISIBLE);
+        cb_navegador_dacia_5.setVisibility(View.VISIBLE);
+        cb_bluetooth_dacia_5.setChecked(snapshot.get(BLUETOOTH).equals("SI"));
+        cb_aire_dacia_5.setChecked(snapshot.get(AIRE_ACONDICIONADO).equals("SI"));
+        cb_navegador_dacia_5.setChecked(snapshot.get(NAVEGADOR).equals("SI"));
+    }
+    public void cargarExtrasSeleccionadosSeat(DocumentSnapshot snapshot){
+        cb_control_crucero_seat_5.setVisibility(View.VISIBLE);
+        cb_navegador_seat_5.setVisibility(View.VISIBLE);
+        cb_sensores_seat_5.setVisibility(View.VISIBLE);
+        cb_sensores_seat_5.setChecked(snapshot.get(SENSORES).equals("SI"));
+        cb_navegador_seat_5.setChecked(snapshot.get(NAVEGADOR).equals("SI"));
+        cb_control_crucero_seat_5.setChecked(snapshot.get(CONTROL_CRUCERO).equals("SI"));
     }
 }

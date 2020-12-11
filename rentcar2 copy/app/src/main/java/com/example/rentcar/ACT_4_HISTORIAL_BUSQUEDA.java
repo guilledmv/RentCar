@@ -50,31 +50,6 @@ public class ACT_4_HISTORIAL_BUSQUEDA extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         cloudReference = FirebaseFirestore.getInstance();
         email = getIntent().getStringExtra("email");
-        añadeNumerosReservaALista(cloudReference, email);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaNumsReserva);
-        lv_ACT_4_HISTORIAL_BUSQUEDA.setAdapter(adapter);
-        lv_ACT_4_HISTORIAL_BUSQUEDA.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-        lv_ACT_4_HISTORIAL_BUSQUEDA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String numSeleccionado = listaNumsReserva.get(position);
-                Intent intent = new Intent(ACT_4_HISTORIAL_BUSQUEDA.this, ACT_4_HISTORIAL_FACTURA.class);
-                intent.putExtra("email", email);
-                intent.putExtra("numero", numSeleccionado);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    // METODO AUXILIAR QUE AÑADE LOS NUMEROS DE RESERVA A UNA LISTA
-    private void añadeNumerosReservaALista(FirebaseFirestore cloudReference, String email) {
-        // Instruccion para acceder a los datos que necesitamos
         cloudReference.collection("Usuarios").document(email).collection("Reservas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -82,13 +57,24 @@ public class ACT_4_HISTORIAL_BUSQUEDA extends AppCompatActivity {
                     Iterator<QueryDocumentSnapshot> it = task.getResult().iterator();
                     while (it.hasNext()) {
                         String elem = it.next().getData().get("numero reserva").toString();
-                        Toast.makeText(ACT_4_HISTORIAL_BUSQUEDA.this, elem, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ACT_4_HISTORIAL_BUSQUEDA.this, elem, Toast.LENGTH_SHORT).show();
                         listaNumsReserva.add(elem);
+                        adapter = new ArrayAdapter<String>(ACT_4_HISTORIAL_BUSQUEDA.this, android.R.layout.simple_list_item_1, listaNumsReserva);
+                        lv_ACT_4_HISTORIAL_BUSQUEDA.setAdapter(adapter);
+                        lv_ACT_4_HISTORIAL_BUSQUEDA.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
                     }
                 }
             }
         });
-        String h = Integer.toString(listaNumsReserva.size());
-        Toast.makeText(ACT_4_HISTORIAL_BUSQUEDA.this,h,Toast.LENGTH_SHORT).show();
+        lv_ACT_4_HISTORIAL_BUSQUEDA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String numSeleccionado = parent.getItemAtPosition(position).toString();
+                Intent intent = new Intent(ACT_4_HISTORIAL_BUSQUEDA.this, ACT_4_HISTORIAL_FACTURA.class);
+                intent.putExtra("email", email);
+                intent.putExtra("numero", numSeleccionado);
+                startActivity(intent);
+            }
+        });
     }
 }
